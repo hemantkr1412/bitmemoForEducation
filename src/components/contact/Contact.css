@@ -1,0 +1,23 @@
+.contactpage {
+  background-color: var(--primary);
+  color: var(--secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  min-height: 80vh;
+}
+
+.contactsocialcontainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.contactsocialcontainer img:hover {
+  animation: scaleup 0.5s;
+  transform: scale(1.1);
+}

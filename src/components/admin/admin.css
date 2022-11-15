@@ -1,0 +1,415 @@
+.adminPage {
+  background-color: var(--primary);
+  min-height: 100vh;
+  color: white;
+}
+.adminTabs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.addAdmin {
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 0 50px ;
+  /* max-width: 500px; */
+  width: 30%;
+  margin: 20px 0;
+}
+.adminPageForm {
+  min-width: 280px;
+  max-width: 560px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  justify-content: center;
+  text-align: left;
+  margin: 10px 0px;
+}
+
+
+.addAdmin button{
+  margin: 40px 0px;
+  width: 125px;
+  cursor: pointer;
+  align-items: center;
+  margin-left: 40%;
+}
+
+.addAdmin h2{
+  text-align: center;
+  margin: 20px 0px;
+}
+
+
+
+
+/* UserDetails */
+.userDetails {
+  align-items: center;
+  /* margin: 20px 0px; */
+  border: 1px solid white;
+  border-radius: 10px;
+  width: 60%;
+  box-shadow: #cfa1f2 0px 0px 10px 0px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+.userDetails h2{
+  text-align: center;
+  margin: 20px 0px;
+}
+
+.userDetailsBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--primary);
+  color: var(--secondary);                                                                                                                                                                                                                        
+}
+
+.userDetailsLeft{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  color: var(--secondary);
+  width: 50%;
+  border-top: 1px solid white;
+  border-right: 1px solid white;
+}
+
+.userDetailsRight{
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; 
+  justify-content: center;*/
+  background-color: var(--primary);
+  color: var(--secondary);
+  width: 50%;;
+  border-top: 1px solid white;
+}
+.userDetailsRight h3{
+  margin: 20px 0px;
+  text-align: center;
+  border-bottom: 1px solid white;
+}
+
+
+.pendingBox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  color: var(--secondary);
+  width: 100%;
+  border-bottom: 1px solid white;
+}
+.rejectedBox{
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  color: var(--secondary);
+  width: 100%;
+  border: 1px solid white;
+}
+.approvedBox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  color: var(--secondary);
+
+  width: 100%;
+
+}
+
+.pendingList{
+  width: 100%;
+}
+.userList{
+  border-bottom: 0.3px solid rgb(210, 205, 205);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  /* box-shadow: #cfa1f2 0px 0px 5px 0px; */
+}
+.userList h3{
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  font-weight: 500;
+  font-style: normal;
+}
+.userList:hover{
+  background-color:  #cfa1f2;
+  color: var(--secondary);
+  transform: scale(1.01.5);
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+  /* box-shadow: #cfa1f2 0px 0px 10px 0px; */
+}
+.userList:focus{
+  background-color: #cfa1f2;
+  color: var(--secondary);
+  transform: scale(1.01);
+  transition: all 0.3s ease-in-out;
+  /* box-shadow: #cfa1f2 0px 0px 10px 0px; */
+}
+
+
+#addAdminStatus{
+  color: red;
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.1rem;
+  margin: 20px 0px;
+  text-align: center;
+}
+
+
+
+/* Admin Page End */
+
+/* "Admin 2nd design" */
+.userDetails2{
+
+  background-color: #f4f1f7;
+  box-shadow: 0 4px 8px 0 #464646;
+  transition: 0.3s;
+  width: 50%;
+  border-radius: 5px;
+  color: #cfa1f2;
+  margin-bottom: 100px;
+
+}
+.userDetails2:hover{
+  box-shadow: 0 8px 16px 0 rgba(48, 48, 48, 0.2);
+}
+
+.userDetails2 h2{
+  text-align: center;
+  margin: 20px 0px;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 0.1rem;
+  font-size: 1.5rem;
+  color: rgb(56, 56, 56);
+}
+.userDetailsBox2{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: rgb(42, 42, 42);
+  padding: 2px 16px;
+
+}
+.listSelector{
+  padding-right: 150px;
+}
+.userDetailsLeft2{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+}
+.userDetailsLeftChild{
+  margin-top: 10px;
+}
+
+.userDetailsRight2{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+}
+.userDetailsRight2 h5{
+  padding: 0px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.1rem;
+}
+.listSelector{
+  height: 20px;
+  width: 60px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.1rem;
+  color: rgb(49, 49, 49);
+}
+select{
+  height: 30px;
+  width: 250px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.1rem;
+  color: rgb(49, 49, 49);
+  border: 0px;
+  background-color: #f4f1f7;
+}
+select:focus{
+  outline: none;
+}
+select:hover{
+  cursor: pointer;
+}
+option{
+  font-size: 1rem;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.1rem;
+  color: rgb(49, 49, 49);
+}
+th,td{
+  padding-left: 2vw;
+  padding-right: 2vw;
+  /* padding-left: 40px;
+  padding-right: 40px; */
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  /* border: 1px solid black; */
+}
+.individualUserDetails{
+  margin-top: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+}
+
+.individualUserDetails button{
+  margin-top: -15px;
+  margin-left: 20px;
+  width: 100px;
+  cursor: pointer;
+  align-items: center;
+  background-color: blue;
+}
+.individualUserDetails p{
+  
+  margin: 40px 0px;
+  font-size: 1vw;
+  font-weight: 500;
+  font-style: normal;
+  font-family: monospace;
+  letter-spacing: 0.1rem;
+  color: rgb(49, 49, 49);
+  font-style: source-code-pro, Menlo, Monaco, Consolas, "Courier New";
+
+}
+.individualUserDetailsData p{
+  margin-left: 20px;
+}
+.btn-box{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.btn-box button{
+  margin: 20px 0px;
+  width: 125px;
+  cursor: pointer;
+  align-items: center;
+
+}
+
+#approveBtn{
+  background-color: green;
+}
+#rejectBtn{
+  margin-left: 50px;
+  background-color: red;
+}
+#approveBtn:hover{
+  background-color: #00ff00;
+}
+#rejectBtn:hover{
+  background-color: #ff0000;
+}
+#approveBtn:focus{
+  background-color: #00ff00;
+}
+#rejectBtn:focus{
+  background-color: #ff0000;
+}
+#approveBtn:active{
+  background-color: #00ff00;
+}
+#rejectBtn:active{
+  background-color: #ff0000;
+}
+#revokedBtn{
+  background-color: #fff200;
+}
+
+#detailsHeader{
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.1rem;
+  color: rgb(49, 49, 49);
+
+}
+.vl {
+  border-left: 0.5px solid rgb(91, 91, 91);
+}
+.listContainer{
+  overflow: scroll;
+}
+@media only screen and (max-width: 1200px) {
+  .userDetails2{
+    width:80%;
+  }
+  .individualUserDetails p{
+    font-size: 1rem;
+  }
+
+}
+@media only screen and (max-width: 700px) {
+  .addAdmin{
+    min-width: 320px;
+    padding: 30px;
+  }
+  .userDetailsBox2{
+    flex-direction: column;
+  }
+  .userDetailsLeft2{
+    width: 100%;
+  }
+  .userDetailsRight2{
+    width: 100%;
+  }
+  .individualUserDetails p{
+    font-size: 1.2rem;
+  }
+  .userDetails2{
+    width: 95%;
+  }
+  .addAdmin{
+    width: 82%;
+  }
+  .th,td{
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-weight: 500;
+    /* border: 1px solid black; */
+  }
+
+}

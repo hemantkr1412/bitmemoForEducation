@@ -1,0 +1,130 @@
+.navbar {
+  height: 100px;
+  background-color: var(--primary);
+  color: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 20px;
+}
+
+.navbuttoncontainer {
+  display: flex;
+}
+.navbutton {
+  width: 100px;
+  text-align: center;
+}
+
+.navbutton:hover {
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: context-menu;
+}
+
+.menucontainer {
+  display: none;
+}
+
+.menucontainer img {
+  width: 30px;
+}
+.menucontainer img:hover {
+  animation: scaleup 0.5s;
+  transform: scale(1.1);
+}
+
+.logocontainer {
+  max-width: 150px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logocontainer img {
+  height: 60px;
+}
+.logocontainer img:hover {
+  animation: scaleup 0.5s;
+  transform: scale(1.1);
+}
+
+.navrightbuttoncontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.connected {
+  border: 1px solid var(--secondary);
+  background-color: rgb(6, 50, 6);
+  padding: 10px;
+  font-family: coolvetica;
+  font-size: large;
+}
+
+.navrightbuttoncontainer button {
+  margin: 0px 20px;
+  font-family: coolvetica;
+  font-size: large;
+}
+
+.menubar {
+  position: fixed;
+  top: 100px;
+  left: 0px;
+  width: 100vw;
+  background-color: var(--tertiary);
+  animation: slidedown 0.5s;
+}
+
+@keyframes slidedown {
+  from {
+    transform: scaleY(0) translateY(-50%);
+  }
+  to {
+    transform: scaleY(1) translateY(0%);
+  }
+}
+
+.menupad {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 100px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+.menuitem {
+  text-align: center;
+  padding: 20px;
+  font-size: large;
+}
+.menuitem:hover {
+  background-color: var(--secondary);
+  color: var(--primary);
+}
+
+@media only screen and (max-width: 900px) {
+  .navbuttoncontainer {
+    display: none;
+  }
+  .menucontainer {
+    display: flex;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .contactusbutton {
+    display: none;
+  }
+  .navbar {
+    height: 75px;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .logocontainer {
+    display: none;
+  }
+}

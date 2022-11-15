@@ -1,0 +1,106 @@
+.viewpage {
+  background-color: var(--primary);
+  color: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  min-height: 80vh;
+}
+
+.viewcontainer {
+  width: 100%;
+  /* max-width: 720px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.viewpage .heading {
+  font-size: large;
+}
+
+.carouselheading {
+  font-family: coolvetica;
+  padding: 10px;
+  font-size: x-large;
+  width: 100%;
+
+  text-align: left;
+  text-decoration: underline;
+}
+
+.nftcarousel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-bottom: 1px solid var(--secondary);
+}
+
+.carouselarrow {
+  height: 460px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: xxx-large;
+  width: 50px;
+}
+
+.carouselcard {
+  margin: 20px;
+  height: 350px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: var(--secondary);
+  border-radius: 20px;
+  position: relative;
+}
+
+.carouselcardimage img {
+  height: 168px;
+  width: 280px;
+  border-radius: 20px 20px 0px 0px;
+}
+.carouselcardtitle {
+  height: 40px;
+  color: var(--primary);
+  font-weight: 800;
+  padding: 10px;
+  font-size: large;
+}
+
+.carouselcardtext {
+  height: 50px;
+  padding: 10px;
+  color: var(--tertiary);
+}
+.downloadbutton {
+  position: absolute;
+  bottom: 10px;
+  left: 125px;
+}
+
+.downloadbutton img {
+  height: 30px;
+  width: 30px;
+}
+
+.downloadbutton img:hover {
+  animation: scaleup 0.5s;
+  transform: scale(1.1);
+}
+
+.verifiedlogo {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 40px;
+  width: 40px;
+}
+
+.verifiedlogo img {
+  height: 40px;
+  width: 40px;
+}

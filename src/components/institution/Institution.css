@@ -1,0 +1,39 @@
+.institutepage {
+  background-color: var(--primary);
+  padding: 20px;
+  color: var(--secondary);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  text-align: center;
+  min-height: 80vh;
+}
+
+.institutepage .heading {
+  font-size: larger;
+  margin: 20px;
+}
+
+.institutepage .emailfield {
+  font-size: larger;
+  font-weight: 800;
+}
+.samplecertificates {
+  margin: 40px 0px;
+}
+
+.certificatecontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px 0px;
+}
+
+.certificatecontainer img {
+  height: 200px;
+  width: 280px;
+  border-radius: 20px;
+  margin: 10px;
+}

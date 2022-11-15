@@ -1,0 +1,547 @@
+/* About section */
+.aboutSectionContainer {
+  background-image: url(./assets/aboutsectionbackground.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 90vh;
+  background-color: var(--primary);
+  color: var(--secondary);
+  padding: 40px 20px;
+}
+
+.aboutsection {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.aboutsectionmobile {
+  display: none;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.aboutsection .illustration {
+  height: 500px;
+  width: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.aboutsectionmobile .illustration {
+  width: 80vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aboutsection .illustration img {
+  height: 100%;
+  width: 450px;
+}
+.aboutsectionmobile .illustration img {
+  height: 100%;
+  width: 80vw;
+}
+
+.aboutsection .writing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: left;
+}
+.aboutsectionmobile .writing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.aboutSectionContainer .writing button {
+  margin: 20px 0px;
+}
+
+.aboutsection .mainheading {
+  font-family: coolvetica;
+  font-size: 7.5rem;
+}
+.aboutsectionmobile .mainheading {
+  font-family: coolvetica;
+  font-size: 3.5rem;
+}
+.aboutsection .secondheading {
+  font-size: 1.5rem;
+  font-weight: 10;
+}
+.aboutsectionmobile .secondheading {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 10;
+}
+
+.aboutSectionContainer .nextpagearrowcontainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  animation: downemphasis 2s infinite;
+}
+.aboutSectionContainer .nextpagearrow {
+  width: 21px;
+  height: 21px;
+  border-left: 2px solid #d1d1d1;
+  border-bottom: 2px solid #d1d1d1;
+  transform: rotate(-45deg);
+}
+
+@keyframes downemphasis {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(50%);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .aboutsection {
+    display: none;
+  }
+  .aboutsectionmobile {
+    display: flex;
+  }
+}
+
+/* Description Section */
+
+.descriptionsectioncontainer {
+  min-height: 110vh;
+  background-color: var(--secondary);
+  background-image: url(./assets/whatisbitbackground.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left center;
+  color: var(--tertiary);
+  padding: 100px;
+}
+
+.descriptionsection {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+  text-align: left;
+  line-height: 25px;
+}
+@media only screen and (max-width: 600px) {
+  .descriptionsection {
+    text-align: center;
+  }
+}
+
+.descriptionsection .writing .heading {
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 2rem;
+  margin: 40px 0px;
+  border-bottom: 1px solid var(--primary);
+  font-family: coolvetica;
+}
+
+/* Certificates section */
+
+.certificatesectioncontainer {
+  background-color: var(--secondary);
+  background-image: url(./assets/certificatesectionbackground.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 100px 0px;
+  display: none;
+}
+
+.certificatesissued {
+  width: 200px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: var(--secondary);
+  color: var(--primary);
+  padding: 50px;
+  border-radius: 20px;
+
+  box-shadow: 0px 0px 20px 1px var(--primary);
+}
+
+.certificatesissued .heading2 {
+  font-size: large;
+  font-weight: 800;
+}
+.certificatesissued .heading3 {
+  font-size: 100px;
+  font-weight: 600;
+}
+
+/* How to use Section */
+
+.howtousecontainer {
+  background-color: var(--primary);
+  color: var(--secondary);
+  display: flex;
+  flex-direction: column;
+  padding: 100px 0px;
+}
+
+.howtouseheading {
+  font-size: 2rem;
+  text-decoration: underline;
+  text-align: center;
+  font-family: coolvetica;
+}
+
+.howtousesection {
+  padding-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.howtousesectionmobile {
+  display: none;
+}
+
+.howtousesection img {
+  height: 20vw;
+  width: 20vw;
+  border-radius: 20px;
+}
+.howtousesection button {
+  margin: 20px 0px;
+}
+
+.howtouseimageright {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.howtousetextleft {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.howtouseillustrationright {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.howtouseillustrationright .illustrationtop {
+  border-bottom: 3px solid var(--secondary);
+  position: relative;
+}
+.howtouseillustrationright .illustrationtop .dot {
+  position: absolute;
+  bottom: -7px;
+  left: -5px;
+  height: 10px;
+  width: 10px;
+  border: 1px solid var(--secondary);
+  border-radius: 5px;
+  background-color: var(--secondary);
+}
+
+/* -------- */
+.howtouseimageleft {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.howtousetextright {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: right;
+}
+.howtouseillustrationleft {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.howtouseillustrationleft .illustrationtop {
+  border-bottom: 3px solid var(--secondary);
+  position: relative;
+}
+.howtouseillustrationleft .illustrationtop .dot {
+  position: absolute;
+  bottom: -7px;
+  right: -5px;
+  height: 10px;
+  width: 10px;
+  border: 1px solid var(--secondary);
+  border-radius: 5px;
+  background-color: var(--secondary);
+}
+
+@media only screen and (max-width: 600px) {
+  .howtouseillustrationleft {
+    display: none;
+  }
+  .howtouseillustrationright {
+    display: none;
+  }
+  .howtousesectionmobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .howtousesection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .howtousesection img {
+    height: 80vw;
+    width: 80vw;
+    border-radius: 20px;
+  }
+  .howtousetextleft {
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+  }
+  .howtousetextright {
+    display: none;
+  }
+  .howtouseimageleft {
+    display: none;
+  }
+  .howtouseimageright {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Solutions Section */
+
+.solutionsectioncontainer {
+  background-image: url(./assets/solutionsBackground.png);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  color: var(--tertiary);
+  text-align: center;
+  padding: 50px 0px;
+}
+
+.solutionsheading {
+  color: var(--primary);
+  font-size: 2rem;
+  font-weight: 800;
+  text-decoration: underline;
+  font-family: coolvetica;
+  margin: 10px 0px;
+  text-align: center;
+}
+
+.solutionscardscontainer {
+  max-width: 1100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 50px 0px;
+}
+
+.solutionscard {
+  margin: 20px;
+  width: 300px;
+  height: 480px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary);
+  border-radius: 20px;
+  color: var(--secondary);
+}
+
+.solutionscard img {
+  width: 300px;
+  height: 350px;
+}
+
+@media only screen and (max-width: 400px) {
+  .solutionscard {
+    width: 250px;
+  }
+  .solutionscard img {
+    width: 250px;
+  }
+}
+
+.cardheading {
+  font-weight: 600;
+  padding: 10px;
+}
+
+.cardtext {
+  padding: 10px;
+}
+
+/* Digital Certificate */
+.digitalcertcontainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.digitalcertcontainer img {
+  width: 50vw;
+  min-width: 300px;
+}
+
+.digitalcerttext {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  max-width: 500px;
+  text-align: right;
+  line-height: 25px;
+}
+.digitalcerttext .heading {
+  font-size: 1.5rem;
+  color: var(--primary);
+  font-family: coolvetica;
+  padding: 20px;
+}
+@media only screen and (max-width: 600px) {
+  .digitalcertcontainer {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .digitalcertcontainer img {
+    width: 80vw;
+  }
+  .digitalcerttext {
+    width: 80vw;
+    text-align: center;
+  }
+}
+
+/* Benefits Section--------------- */
+.whybitcontainer {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0px;
+  background-image: url(./assets/whybitbackground.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  height: 1200px;
+}
+
+.whybitcontainer .heading {
+  color: var(--primary);
+  font-size: 1.5rem;
+  font-family: coolvetica;
+  padding: 20px;
+}
+
+.benefitscontainer {
+  margin: 40px 0px;
+}
+
+.benefit {
+  background-color: var(--primary);
+  width: 350px;
+  padding: 30px 0px;
+  color: var(--secondary);
+  font-family: coolvetica;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.benefit img {
+  height: 40px;
+  margin: 0px 20px;
+}
+
+.benefitdivider {
+  width: 350px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+  .benefit {
+    width: 300px;
+  }
+  .benefitdivider {
+    width: 300px;
+  }
+}
+
+.benefitdivider .dividerright {
+  border-left: 2px dashed var(--primary);
+}
+.benefitdivider .dividerrightwithdot {
+  border-left: 2px dashed var(--primary);
+  position: relative;
+}
+.benefitdivider .dividerrightwithdot .dot {
+  position: absolute;
+  bottom: -7px;
+  left: -6.5px;
+  height: 10px;
+  width: 10px;
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  background-color: var(--primary);
+
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  from {
+    box-shadow: 0px 0px 1px 1px var(--tertiary);
+  }
+  to {
+    box-shadow: 0px 0px 5px 1px var(--tertiary);
+  }
+}
+
+.whybitcontainer button {
+  margin: 20px 0px;
+}
