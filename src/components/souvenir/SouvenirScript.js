@@ -6,8 +6,10 @@ import {
   createSouvenir,
   addSouvenir,
   checkDestination,
+  getMyKYCStatus
 } from "../Scripts/apiCalls";
 import { create_metadata } from "../Scripts/metadata";
+
 
 export const SouvenirScript = () => {
   const navigate = useNavigate();
@@ -22,6 +24,7 @@ export const SouvenirScript = () => {
   const [status, setStatus] = useState("");
   const user = useContext(UserContext);
 
+  const url =" http://127.0.0.1:8000";
   //KYC Information
   const [input, setInput] = useState({
     name: "",
@@ -56,6 +59,26 @@ export const SouvenirScript = () => {
       .catch((err) => {
         setStatus("Unable to fetch data.");
       });
+
+      getMyKYCStatus(user.userAccount).then((res) => {
+        console.log("Cliked")
+        console.log(user.userAccount)
+        if (res.status === "Success") {
+            user.setIsKYC(true);
+            user.setKycStatus(res.statusCode)
+            user.setComment(res.comment)
+            setInput(
+              {
+                name: res.data.name,
+                website: res.data.website,
+                email: res.data.email,
+                phone: res.data.contact,
+                CIN: res.data.regId,
+              }
+            )
+        }
+      });
+
   }, [user]);
 
   const saveImage = (file) => {
@@ -74,7 +97,7 @@ export const SouvenirScript = () => {
     let fieldcheck = checkEmptyFields();
     if (fieldcheck) {
       // let souvenirfileraw = await addFrame();
-      console.log(input,uploadedImage);
+      // console.log(input,uploadedImage);
       return { status:"Success"};
 
       // if (souvenirfileraw !== "Server error") {
@@ -197,6 +220,7 @@ export const SouvenirScript = () => {
 
   return {
     user,
+    uploadedImage,
     uploadedImageURL,
     isDestination,
     destinationName,

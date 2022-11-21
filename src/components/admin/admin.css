@@ -355,6 +355,10 @@ th,td{
 }
 #revokedBtn{
   background-color: #fff200;
+  color: black;
+}
+#blueBtn{
+  background-color: blue;
 }
 
 #detailsHeader{
@@ -371,16 +375,34 @@ th,td{
 .listContainer{
   overflow: scroll;
 }
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1300px) {
   .userDetails2{
-    width:80%;
+    width:85%;
   }
   .individualUserDetails p{
     font-size: 1rem;
+
+  }
+  .individualUserDetailsData p{
+    margin-left: 0px;
   }
 
 }
-@media only screen and (max-width: 700px) {
+.popup-box-footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#blueBtnView{
+  background-color: blue;
+  color: white;
+  width: 120px;
+  margin-top: -10px;
+  margin-left: 20px;
+}
+
+@media only screen and (max-width: 800px) {
   .addAdmin{
     min-width: 320px;
     padding: 30px;
@@ -395,7 +417,7 @@ th,td{
     width: 100%;
   }
   .individualUserDetails p{
-    font-size: 1.2rem;
+    font-size: 0.9rem;
   }
   .userDetails2{
     width: 95%;
@@ -410,6 +432,9 @@ th,td{
     padding-bottom: 20px;
     font-weight: 500;
     /* border: 1px solid black; */
+  }
+  .individualUserDetailsData p{
+    margin-left: 10px;
   }
 
 }

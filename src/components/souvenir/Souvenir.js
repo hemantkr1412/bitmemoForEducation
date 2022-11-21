@@ -7,6 +7,8 @@ import DND from "../Scripts/draganddrop/DND";
 import {KYCform} from "./KYCform";
 import { useNavigate } from "react-router-dom";
 import fileWaiting from "./assets/icon-pending.png";
+import { useEffect } from "react";
+
 
 import React from "react";
 
@@ -26,9 +28,16 @@ export const Souvenir = () => {
     isKYC
   } = SouvenirScript();
 
+
   if (!user.isConnected) {
     return <Connect />;
   }
+
+  
+  
+
+
+  
 
   
   if(!user.isKYC){
@@ -37,7 +46,7 @@ export const Souvenir = () => {
         return ( 
           <div className="nowalletpage">
           <h2>You have to Complete Your KYC</h2>
-          <p>click Next to for your KYC Process</p>
+          <p>Click on Next to Apply KYC</p>
           <button
             onClick={() => {
               navigate("/kycform");
@@ -47,34 +56,52 @@ export const Souvenir = () => {
             Next
           </button>
         </div>
-          // <div className="individualpage">
-          //   <h1>You have to do Your KYC</h1>
-          //   <p>Contact us to get your prestigious organization registered.</p>
-          //   <h2>Email us at support@beimagine.tech</h2>
-          // </div>
         );
     }
   }else{
-    if(user.kycStatus === "Pending"){
+
+    if(user.kycStatus === "in_progress" ){
       return ( 
         <div className="nowalletpage">
-            <div class="alert">
+          <div class="alert">
               <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
               <strong>Success!</strong> Successfully submitted KYC details.
           </div>
-        <h2>Your KYC Status is {user.kycStatus} </h2>
+        <h2>Your KYC Status is Pending </h2>
         <img src={fileWaiting} alt="Please wait" />
       </div>
       );
-    }else{
-      
+
+    }else if(user.kycStatus === "Revoke"){
+      return ( 
+        <div className="nowalletpage">
+        <h2>Sorry ! Your are Blacklisted </h2>
+        <p >Reason : {user.comment}</p>
+        <h2>Email us at support@beimagine.tech</h2>
+      </div>
+      );
     }
-    
-  }
+    else if(user.kycStatus === "Rejected"){
+      return ( 
+        <div className="nowalletpage">
+          <h2>Sorry ! Your KYC has been Rejected </h2>
+          <p>Reason : {user.comment}</p>
+          <p>Click on Button to Reapply KYC</p>
+          <button
+              onClick={() => {
+                navigate("/kycform");
+                
+              }}
+            >
+              Reapply
+          </button>
+      </div>
+      );
+    }
+    else{
 
-
-  return (
-    <div className="individualpage">
+      return (
+      <div className="individualpage">
       <div className="individualformcontainer">
         <h1>Welcome {destinationName}</h1>
         <div>{destinationDescription}</div>
@@ -89,28 +116,6 @@ export const Souvenir = () => {
             saveImage(e.target.files[0]);
           }}
         />
-        {/* <div
-          className="fileselector"
-          style={{
-            backgroundImage: "url('" + uploadedImageURL + "')",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-          }}
-          onClick={() => {
-            document.getElementById("fileselectorinput").click();
-          }}
-        >
-          <img src={fileselector} alt="Upload File" />
-          Drag &amp; Drop File here
-          <div>or</div>
-          <button
-            onClick={() => {
-              document.getElementById("fileselectorinput").click();
-            }}
-          >
-            Browse Files
-          </button>
-        </div> */}
         <DND uploadedImageURL={uploadedImageURL} saveImage={saveImage} />
         <label htmlFor="souvenirname">Souvenir Name*</label>
         <input
@@ -139,7 +144,13 @@ export const Souvenir = () => {
           </div>
         )}
       </div>
-    </div>
-  );
+      </div>
+    );
+      
+    }
+    
+  }
+
+  
 };
 export default Souvenir;

@@ -1,6 +1,6 @@
 import { addFrame } from "./metadata";
 
-const api = "https://bitmemoir.org/";
+const api = "http://127.0.0.1:8000/";
 
 export const addAdmin = async (name, designation, account, addedBy) => {
   const endpoint = "addAdmin";
@@ -252,3 +252,107 @@ export const individualFileUpload = async (
       return "Server error";
     });
 };
+
+//KYC Application
+export const kycApply = async (name,walletKey, website,email,contact,regId,idProof) => {
+  const endpoint = "applyKYC";
+  const url = api + endpoint;
+  let formData = new FormData();
+  formData.append("name", name);
+  formData.append("walletKey", walletKey);
+  formData.append("website", website);
+  formData.append("email", email);
+  formData.append("contact", contact);
+  formData.append("regId", regId);
+  formData.append("idProof", idProof);
+  
+  const response = await fetch(url, { method: "POST", body: formData })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+      return "Server error";
+    });
+  return response;
+};
+
+export const setKYCStatus = async (status,regId,comment) => {
+  const endpoint = "kycStatus";
+  const url = api + endpoint;
+  let formData = new FormData();
+  formData.append("status", status);
+  formData.append("regId", regId);
+  formData.append("comment", comment);
+
+  const response = await fetch(url, { method: "POST", body: formData })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+      return "Server error";
+    });
+
+  return response;
+}
+
+export const adminViewKYCstatus = async (status) => {
+  const endpoint = "adminViewKycStatus";
+  const url = api + endpoint;
+  let formData = new FormData();
+  formData.append("status", status);
+
+  const response = await fetch(url, { method: "POST", body: formData })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+
+      return (err);
+    });
+
+  return response;
+  
+   
+}
+
+
+export const getMyKYCStatus = async (walletKey) => {
+  const endpoint = "getMyKycStatus";
+  const url = api + endpoint;
+  let formData = new FormData();
+  formData.append("walletKey", walletKey);
+  const response = await fetch(url, { method: "POST", body: formData })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+
+      return (err);
+    });
+
+  return response;
+  
+
+}
+
+export const updateKYC = async ( name, website, email, contact, regId, idProof) => {
+  const endpoint = "updatekyc";
+  const url = api + endpoint;
+  let formData = new FormData();
+  formData.append("name", name);
+  formData.append("website", website);
+  formData.append("email", email);
+  formData.append("contact", contact);
+  formData.append("regId", regId);
+  formData.append("idProof", idProof);
+  const response = await fetch(url, { method: "POST", body: formData })
+    .then((res) => {
+      return res.json();
+    }
+    )
+    .catch((err) => {
+        
+        return (err);
+      });
+  return response
+  }

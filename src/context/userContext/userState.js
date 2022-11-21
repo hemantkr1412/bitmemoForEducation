@@ -13,7 +13,8 @@ const UserState = (props) => {
   const [isConnected, setIsConnected] = useState(false);
   const [userAccount, setUserAccount] = useState("");
   const [isKYC, setIsKYC] = useState(false);
-  const [kycStatus, setKycStatus] = useState("Pending");
+  const [kycStatus, setKycStatus] = useState("in_progress");
+  const [comment, setComment] = useState("");
  
 
   useEffect(() => {
@@ -68,6 +69,8 @@ const UserState = (props) => {
         setIsKYC,
         kycStatus,
         setKycStatus,
+        comment,
+        setComment
       }}
     >
       {props.children}
