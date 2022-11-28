@@ -1,38 +1,16 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useContext } from "react";
 import UserContext from "../../context/userContext/UserContext";
-import { create_metadata } from "../Scripts/metadata";
-import { individualFileUpload, getIndividual } from "../Scripts/apiCalls";
-import { checkDestination } from "../Scripts/apiCalls";
+import { nftApi } from "../Scripts/apiCalls";
 
 export const IndividualScript = () => {
   const user = useContext(UserContext);
   const [status, setStatus] = useState("");
   const [isUploading, setIsUploading] = useState(false);
-  const [uploadedImage, setUploadedImage] = useState("");
+  const [uploadedImage, setUploadedImage] = useState(null);
   const [uploadedImageURL, setUploadedImageURL] = useState("");
-  const [storageUsed, setStorageUsed] = useState(0);
-  const [storageLimit, setStorageLimit] = useState(5120);
-
-  useEffect(() => {
-    poppulateIndividualData();
-  }, [user]);
-
-  const poppulateIndividualData = async () => {
-    getIndividual(user.userAccount)
-      .then((res) => {
-        if (res !== "Server error") {
-          if (res.status === "Success") {
-            setStorageLimit(res.credentials.storage_limit);
-            setStorageUsed(res.credentials.storage_used);
-          }
-        }
-      })
-      .catch((err) => {
-        setStatus("Unable to fetch data.");
-      });
-  };
+  const [assetName, setAssetName] = useState("");
+  const [assetDescription, setAssetDescription] = useState("");
 
   const saveImage = (file) => {
     setUploadedImage(file);
@@ -43,96 +21,84 @@ export const IndividualScript = () => {
     filereader.readAsDataURL(file);
   };
 
-  const submitHandler = (name, description) => {
-    checkforemptydata(name, description);
+  const submitHandler = () => {
+    setStatus("");
+    if (!checkForEmptyData()) return;
+    else if (!checkForFileSize()) return;
+    else if (!checkforstoragelimit()) return;
+    else {
+      uploadImage();
+    }
   };
 
-  const checkforemptydata = (name, description) => {
-    if (name === "") {
+  const checkForEmptyData = () => {
+    if (assetName === "") {
       setStatus("Asset name is required.");
-    } else if (description === "") {
+      return false;
+    } else if (assetDescription === "") {
       setStatus("Asset description is required");
-    } else if (uploadImage === "") {
+      return false;
+    } else if (uploadedImage === null) {
       setStatus("Image is required.");
+      return false;
+    } else if (uploadedImage.size === undefined) {
+      setStatus("Invalid Image");
+      return false;
     } else {
-      setStatus("Uploading...");
-      checkforstoragelimit(name, description);
+      console.log(uploadedImage.size);
+      return true;
     }
   };
 
-  const checkforstoragelimit = (name, description) => {
+  const checkForFileSize = () => {
     let filesize = parseFloat(uploadedImage.size) / 1024;
-
-    if (filesize + storageUsed > storageLimit) {
-      setStatus(
-        "Storage quota exceeded. Please contact support@beimagine.tech for more storage space."
-      );
-      return;
+    if (filesize <= 102400) {
+      return true;
     } else {
-      setIsUploading(true);
-      create_metadata(uploadedImage, name, description)
-        .then((res) => {
-          if (res.status === "Success") {
-            uploadImage(
-              name,
-              description,
-              res.metadataURL,
-              res.imageURL,
-              filesize,
-              user.userAccount
-            );
-          } else {
-            setStatus("Something went wrong. PLease try again.");
-            setIsUploading(false);
-          }
-        })
-        .catch((err) => {
-          setStatus("Something went wrong. PLease try again.");
-          setIsUploading(false);
-        });
+      setStatus("File should be less than 100MB in size.");
+      return false;
     }
   };
 
-  const uploadImage = async (
-    name,
-    description,
-    metadataURL,
-    imageURL,
-    filesize,
-    account
-  ) => {
-    individualFileUpload(
-      name,
-      description,
-      metadataURL,
-      imageURL,
-      filesize,
-      account
-    ).then((res) => {
-      if (res !== "Server error") {
-        if (res.status === "Success") {
-          setIsUploading(false);
-          setStatus("NFT created successfully.");
-          let explorerURL =
-            "https://mumbai.polygonscan.com/tx/" + res["tx_hash"];
-          window.open(explorerURL);
-        } else {
-          setStatus("Something went wrong. PLease try again.");
-          setIsUploading(false);
-        }
-      } else {
-        setStatus("Something went wrong. PLease try again.");
+  const checkforstoragelimit = () => {
+    let filesize = parseFloat(uploadedImage.size) / 1024 / 1024;
+    if (filesize + user.userData?.storage_used > user.userData?.storage_limit) {
+      setStatus(
+        "Storage quota exceeded. Please select a smaller file or contact support@beimagine.tech for more storage space."
+      );
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const uploadImage = () => {
+    setIsUploading(true);
+    nftApi({
+      account: user.userAccount,
+      image: uploadedImage,
+      asset_name: assetName,
+      asset_description: assetDescription,
+    })
+      .then(async (res) => {
+        setStatus("Uploaded Successfully.");
+        await user.poppulateUserData();
         setIsUploading(false);
-      }
-    });
+      })
+      .catch((err) => {
+        setStatus("Something went wrong. Please try again.");
+        setIsUploading(false);
+      });
   };
 
   return {
     status,
     isUploading,
     uploadedImageURL,
-    storageLimit,
-    storageUsed,
+    assetName,
+    setAssetName,
+    assetDescription,
+    setAssetDescription,
     saveImage,
     submitHandler,
   };

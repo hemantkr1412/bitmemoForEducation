@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import UserContext from "../../context/userContext/UserContext";
 import { getCertificates, getIssuerDetails } from "../Scripts/apiCalls";
+import { nftApi } from "../Scripts/apiCalls";
 
 const ViewScript = () => {
   const navigate = useNavigate();
@@ -11,33 +12,20 @@ const ViewScript = () => {
   const [status, setStatus] = useState("");
 
   useEffect(() => {
-    if (!user.iswalletAvailable) {
-      navigate("/wallet");
-      return;
-    }
-    poppulateCertificates();
+    if (user.isConnected) poppulateCertificates();
   }, [user]);
 
   const poppulateCertificates = async () => {
-    if (user.userAccount != "") {
-      setStatus("Loading my certificates...");
-      await getCertificates(user.userAccount)
-        .then((res) => {
-          if (res.status === "Success") {
-            setCertificateData(res.categories);
-            setStatus("");
-          } else {
-            setStatus(
-              "Something went wrong loading your files. Please refresh or try again in some time."
-            );
-          }
-        })
-        .catch((err) => {
-          setStatus(
-            "Something went wrong loading your files. Please refresh or try again in some time."
-          );
-        });
-    }
+    setStatus("Loading certificates...");
+    nftApi({ account: user.userAccount })
+      .then((res) => {
+        console.log(res);
+        setStatus("");
+        setCertificateData(res);
+      })
+      .catch((err) => {
+        setStatus("Something went wrong fetching NFTs,");
+      });
   };
 
   return { status, certificateData, user, navigate };

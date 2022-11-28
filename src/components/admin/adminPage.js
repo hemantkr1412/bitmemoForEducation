@@ -2,55 +2,53 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import "./admin.css";
 import AddAdminPage from "./addAdminPage";
-import AddIssuerPage from "./addIssuerPage";
-import { checkAdmin } from "../Scripts/apiCalls";
-import AddHotelPage from "./addHotelPage";
-import { UserDetails } from "./UserDetails";
 import UserContext from "../../context/userContext/UserContext";
+import { adminApi, userApi } from "../Scripts/apiCalls";
+import UserDetailsContainer from "./userdetailsContainer";
 
 export const AdminPage = () => {
   const user = useContext(UserContext);
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [status, setStatus] = useState("Checking credentials...");
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     checkAdminCredentials();
   }, [user]);
 
-  const checkAdminCredentials = async () => {
-    setStatus("Checking credentials");
-    await checkAdmin(user.userAccount)
+  const checkAdminCredentials = () => {
+    adminApi({ account: user.userAccount })
       .then((res) => {
-        if (res.status === "Success") {
-          setIsAdmin(true);
-          setStatus(
-            "Welcome " +
-              res.credentials.name +
-              " (" +
-              res.credentials.designation +
-              ")"
-          );
-          setIsAdmin(true);
-        } else if (res.status === "Failed") {
-          setStatus("Please connect with an admin account.");
-        } else if (res === "Server error") {
-          setStatus("Server error.");
-        }
+        setStatus("");
+        setIsAdmin(true);
+        poppulateUserData();
       })
       .catch((err) => {
-        setStatus("Server error.");
+        setIsAdmin(false);
+        setStatus("Please connect with an admin account.");
+      });
+  };
+
+  const poppulateUserData = () => {
+    userApi({ account: user.userAccount, querry_all: "querry_all" })
+      .then((res) => {
+        console.log(res);
+        setUsers(res);
+      })
+      .catch((err) => {
+        setStatus("Something went wrong.");
       });
   };
 
   return (
     <div className="adminpage">
-      {/* {status} */}
+      {status}
       {isAdmin && (
         <div className="adminTabs">
-          {/* <AddHotelPage />
-          <AddIssuerPage /> */}
           <AddAdminPage />
-          <UserDetails />
+          {users.length > 0 && (
+            <UserDetailsContainer users={users} update={poppulateUserData} />
+          )}
         </div>
       )}
     </div>

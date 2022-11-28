@@ -1,111 +1,56 @@
-// import "../individual/Individual.css";
-import "./Souvenir.css";
-import fileselector from "../assets/fileselector.svg";
+import "../individual/Individual.css";
+// import "./Souvenir.css";
 import SouvenirScript from "./SouvenirScript";
 import Connect from "../connection/Connect";
 import DND from "../Scripts/draganddrop/DND";
-import {KYCform} from "./KYCform";
-import { useNavigate } from "react-router-dom";
-import fileWaiting from "./assets/icon-pending.png";
-import { useEffect } from "react";
-
+import { useContext } from "react";
+import UserContext from "../../context/userContext/UserContext";
+import NoWalletPage from "../connection/NoWalletPage";
+import KYC from "../kyc/kyc";
+import AddFrame from "./addFrame";
+import Preview from "./preview";
 
 import React from "react";
-
 export const Souvenir = () => {
-  const navigate = useNavigate();
+  const user = useContext(UserContext);
   const {
-    user,
-    uploadedImageURL,
-    isDestination,
-    destinationName,
-    destinationDescription,
-    destinationSouvenirNumber,
-    isloading,
     status,
+    isUploading,
+    uploadedImageURL,
+    selectedFrame,
+    setSelectedFrame,
+    assetName,
+    setAssetName,
+    assetDescription,
+    setAssetDescription,
+    recipient,
+    setRecipient,
     saveImage,
-    submit,
-    isKYC
+    submitHandler,
+    addFrameopen,
+    setAddFrameOpen,
+    previewOpen,
+    setPreviewOpen,
   } = SouvenirScript();
 
+  if (!user.iswalletAvailable) {
+    return <NoWalletPage />;
+  }
 
   if (!user.isConnected) {
     return <Connect />;
   }
 
-  
-  
+  if (user.userData.status !== "Approved") {
+    return <KYC />;
+  }
 
-
-  
-
-  
-  if(!user.isKYC){
-    console.log(user.isKYC);
-      if (!isDestination) {
-        return ( 
-          <div className="nowalletpage">
-          <h2>You have to Complete Your KYC</h2>
-          <p>Click on Next to Apply KYC</p>
-          <button
-            onClick={() => {
-              navigate("/kycform");
-              
-            }}
-          >
-            Next
-          </button>
-        </div>
-        );
-    }
-  }else{
-
-    if(user.kycStatus === "in_progress" ){
-      return ( 
-        <div className="nowalletpage">
-          <div class="alert">
-              <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-              <strong>Success!</strong> Successfully submitted KYC details.
-          </div>
-        <h2>Your KYC Status is Pending </h2>
-        <img src={fileWaiting} alt="Please wait" />
-      </div>
-      );
-
-    }else if(user.kycStatus === "Revoke"){
-      return ( 
-        <div className="nowalletpage">
-        <h2>Sorry ! Your are Blacklisted </h2>
-        <p >Reason : {user.comment}</p>
-        <h2>Email us at support@beimagine.tech</h2>
-      </div>
-      );
-    }
-    else if(user.kycStatus === "Rejected"){
-      return ( 
-        <div className="nowalletpage">
-          <h2>Sorry ! Your KYC has been Rejected </h2>
-          <p>Reason : {user.comment}</p>
-          <p>Click on Button to Reapply KYC</p>
-          <button
-              onClick={() => {
-                navigate("/kycform");
-                
-              }}
-            >
-              Reapply
-          </button>
-      </div>
-      );
-    }
-    else{
-
-      return (
-      <div className="individualpage">
+  return (
+    <div className="individualpage">
       <div className="individualformcontainer">
-        <h1>Welcome {destinationName}</h1>
-        <div>{destinationDescription}</div>
-        {destinationSouvenirNumber} Souvenirs issued so far.
+        <h1>Welcome {user.userData.name}</h1>
+        <div>{user.userData.description}</div>
+        {user.userData.total_souvenirs} Souvenirs issued so far.
         <h1>Give out Souvenirs</h1>
         <label htmlFor="individualfile">Upload Image*</label>
         <input
@@ -117,40 +62,80 @@ export const Souvenir = () => {
           }}
         />
         <DND uploadedImageURL={uploadedImageURL} saveImage={saveImage} />
+        <label htmlFor="souvenirname">Souvenir Frame*</label>
+        <select
+          name="frameselector"
+          id="frameselector"
+          value={selectedFrame}
+          onChange={(e) => {
+            if (e.target.value === "addFrame") {
+              setAddFrameOpen(true);
+            } else {
+              setSelectedFrame(e.target.value);
+            }
+          }}
+        >
+          <option value="">None</option>
+          {Object.keys(user.userData.frames).map((frame) => (
+            <option value={user.userData.frames[frame]} key={frame}>
+              {frame}
+            </option>
+          ))}
+          <option
+            value="addFrame"
+            style={{ background: "rgba(1, 1, 1, 0.2)" }}
+            onClick={() => console.log("Add frame")}
+          >
+            Add Frame
+          </option>
+        </select>
         <label htmlFor="souvenirname">Souvenir Name*</label>
         <input
           type="text"
           id="souvenirname"
           placeholder="Enter Souvenir Name"
+          value={assetName}
+          onChange={(e) => setAssetName(e.target.value)}
         />
         <label htmlFor="recipientaddress">Recipient Wallet Address*</label>
         <input
           type="text"
           id="recipientaddress"
           placeholder="Enter Recipient Wallet Address"
+          value={recipient}
+          onChange={(e) => setRecipient(e.target.value)}
         />
         <label htmlFor="description">Description*</label>
-        <textarea name="description" id="description"></textarea>
+        <textarea
+          name="description"
+          id="description"
+          value={assetDescription}
+          onChange={(e) => setAssetDescription(e.target.value)}
+        ></textarea>
         <div className="status">{status}</div>
-        {!isloading && (
-          <div className="whitebutton">
-            <button
-              onClick={() => {
-                submit();
-              }}
-            >
-              Submit
-            </button>
-          </div>
-        )}
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-around",
+          }}
+        >
+          {isUploading ? (
+            <button>Uploading...</button>
+          ) : (
+            <button onClick={submitHandler}>Submit</button>
+          )}
+          <button onClick={() => setPreviewOpen(true)}>Preview</button>
+        </div>
       </div>
-      </div>
-    );
-      
-    }
-    
-  }
-
-  
+      <AddFrame open={addFrameopen} setOpen={setAddFrameOpen} />
+      <Preview
+        open={previewOpen}
+        setOpen={setPreviewOpen}
+        souvenir={uploadedImageURL}
+        frame={selectedFrame}
+      />
+    </div>
+  );
 };
 export default Souvenir;

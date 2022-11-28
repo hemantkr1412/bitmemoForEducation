@@ -1,7 +1,7 @@
 import React from "react";
 import "./admin.css";
 import { useState, useContext } from "react";
-import { addAdmin } from "../Scripts/apiCalls";
+import { adminApi } from "../Scripts/apiCalls";
 import UserContext from "../../context/userContext/UserContext";
 export const AddAdminPage = () => {
   const user = useContext(UserContext);
@@ -24,7 +24,7 @@ export const AddAdminPage = () => {
       </div>
       <p id="addAdminStatus">{status}</p>
       <button
-        onClick={async () => {
+        onClick={() => {
           setStatus("adding admin...");
           let name = document.getElementById("name").value;
           let designation = document.getElementById("designation").value;
@@ -34,15 +34,18 @@ export const AddAdminPage = () => {
             setStatus("User account can not be empty.");
             return;
           } else {
-            await addAdmin(name, designation, account, addedBy).then((res) => {
-              if (res === "Server error") {
-                setStatus("Server error");
-              } else if (res.status === "Success") {
+            setStatus("Adding admin...");
+            adminApi({
+              account: addedBy,
+              new_admin_account: account,
+              name: name,
+              designation: designation,
+            })
+              .then((res) => {
+                console.log(res);
                 setStatus("Admin added successfully.");
-              } else {
-                setStatus(res.response);
-              }
-            });
+              })
+              .catch((err) => setStatus("something went wrong."));
           }
         }}
       >

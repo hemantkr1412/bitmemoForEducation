@@ -29,6 +29,10 @@
   text-align: right;
 }
 
+.contactcontainer a {
+  color: white;
+}
+
 .socialcontainer {
   padding: 10px 0px;
 }

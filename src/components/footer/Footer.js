@@ -1,7 +1,6 @@
 import "./Footer.css";
 
-import React from "react";
-
+import logo from "../assets/logo.png";
 import linkedinlogo from "./assets/linkedinlogo.svg";
 import instagramlogo from "./assets/instagramlogo.svg";
 const Footer = () => {
@@ -11,14 +10,19 @@ const Footer = () => {
       <div className="footercontainer">
         <div className="footerlogocontainer">
           <img
-            src="https://beimagine.tech/wp-content/uploads/2022/04/BITlogo-white.png"
+            src={logo}
             alt="BEYOND IMAGINATION TECHNOLOGIES"
+            onClick={() => {
+              window.open("https://www.bitindiaofficial.tech/");
+            }}
           />
         </div>
 
         <div className="contactcontainer">
           Contact us:
-          <div>support@beimagine.tech</div>
+          <div>
+            <a href="mailto:support@beimagine.tech">support@beimagine.tech</a>
+          </div>
           <div className="socialcontainer">
             <img
               src={linkedinlogo}

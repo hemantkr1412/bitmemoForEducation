@@ -15,12 +15,11 @@ import cerifycert from "./assets/cerifycert.svg";
 import dataprotection from "./assets/dataprotection.svg";
 import integration from "./assets/integration.svg";
 import robustinfra from "./assets/robustinfra.svg";
-
 import React from "react";
 import UserContext from "../../context/userContext/UserContext";
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getNumberOfCertificates } from "../Scripts/apiCalls";
+import { kpiApi } from "../Scripts/apiCalls";
 
 const Home = () => {
   const user = useContext(UserContext);
@@ -66,14 +65,9 @@ const Home = () => {
   }, []);
 
   const poppulateCertificates = async () => {
-    await getNumberOfCertificates().then((res) => {
-      console.log(res);
-      if (res != "Server error") {
-        let onlyCertificates = res.credentials["only_certificates"];
-        let onlySouvenirs = res.credentials["only_souvenirs"];
-        setCertificates(onlyCertificates);
-        setSouvenirs(onlySouvenirs);
-      }
+    kpiApi().then((res) => {
+      setCertificates(res.certificates);
+      setSouvenirs(res.souvenirs);
     });
   };
   return (
@@ -93,7 +87,7 @@ const Home = () => {
                 toScrollElement.scrollIntoView();
               }}
             >
-              <a>Learn More</a>
+              Learn More
             </button>
           </div>
           <div className="illustration">
@@ -109,8 +103,14 @@ const Home = () => {
             <div className="secondheading">
               All digital records and memories over Blockchain
             </div>
-            <button>
-              <a>Learn More</a>
+            <button
+              onClick={() => {
+                let toScrollElement =
+                  document.getElementById("whatisbitmemoir");
+                toScrollElement.scrollIntoView();
+              }}
+            >
+              Learn More
             </button>
           </div>
         </div>

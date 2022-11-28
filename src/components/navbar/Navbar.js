@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import menu from "./assets/menu.svg";
+import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import UserContext from "../../context/userContext/UserContext";
@@ -104,7 +105,7 @@ const Navbar = () => {
       {isMenu && <Menubar />}
       <div className="logocontainer">
         <img
-          src="https://beimagine.tech/wp-content/uploads/2022/04/BITlogo-white.png"
+          src={logo}
           alt="BEYOND IMAGINATION TECHNOLOGIES"
           onClick={() => navigate("/home")}
         />

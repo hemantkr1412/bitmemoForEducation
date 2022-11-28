@@ -4,9 +4,14 @@ import React from "react";
 import Connect from "../connection/Connect";
 import ViewScript from "./ViewScript";
 import { NFTCard } from "./NFTCard";
+import NoWalletPage from "../connection/NoWalletPage";
 
 const View = () => {
   const { status, certificateData, user, navigate } = ViewScript();
+
+  if (!user.iswalletAvailable) {
+    return <NoWalletPage />;
+  }
 
   if (!user.isConnected) {
     return <Connect />;

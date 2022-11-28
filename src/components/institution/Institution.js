@@ -4,10 +4,29 @@ import certificate2 from "./assets/certificate2.png";
 import certificate3 from "./assets/certificate3.png";
 import certificate4 from "./assets/certificate4.png";
 import certificate5 from "./assets/certificate5.png";
-
-import React from "react";
+import UserContext from "../../context/userContext/UserContext";
+import { useContext } from "react";
+import NoWalletPage from "../connection/NoWalletPage";
+import Connect from "../connection/Connect";
+import KYC from "../kyc/kyc";
 
 export const Institution = () => {
+  const user = useContext(UserContext);
+
+ if (!user.iswalletAvailable) {
+    return <NoWalletPage />;
+  }
+
+  if (!user.isConnected) {
+    return <Connect />;
+  }
+
+  if (user.userData.status !== "Approved") {
+    return <KYC />;
+  }
+
+
+
   return (
     <div className="institutepage">
       <div className="heading">

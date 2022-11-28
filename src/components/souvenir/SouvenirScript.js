@@ -1,237 +1,116 @@
-import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import UserContext from "../../context/userContext/UserContext";
-import { useNavigate } from "react-router-dom";
-import {
-  createSouvenir,
-  addSouvenir,
-  checkDestination,
-  getMyKYCStatus
-} from "../Scripts/apiCalls";
-import { create_metadata } from "../Scripts/metadata";
+import { nftApi } from "../Scripts/apiCalls";
+import { ethers } from "ethers";
 
-
-export const SouvenirScript = () => {
-  const navigate = useNavigate();
-  const [uploadedImage, setUploadedImage] = useState("");
-  const [uploadedImageURL, setUploadedImageURL] = useState("");
-  const [isDestination, setIsDestination] = useState(false);
-  const [destinationName, setDestinationname] = useState("");
-  const [destinationDescription, setDestinationDescription] = useState("");
-  const [destinationFrame, setDestinationFrame] = useState("");
-  const [destinationSouvenirNumber, setDestinationSouvenirNumber] = useState(0);
-  const [isloading, setIsloading] = useState(false);
-  const [status, setStatus] = useState("");
+const SouvenirScript = () => {
   const user = useContext(UserContext);
-
-  const url =" http://127.0.0.1:8000";
-  //KYC Information
-  const [input, setInput] = useState({
-    name: "",
-    website:"",
-    email:"",
-    phone:"",
-    CIN:"",
-    IdProof:""
-  });
-
-
-
-  
-
-  useEffect(() => {
-    if (!user.iswalletAvailable) {
-      navigate("/wallet");
-      return;
-    }
-    checkDestination(user.userAccount)
-      .then((res) => {
-        if (res != "Server error") {
-          if (res.status === "Success") {
-            setIsDestination(true);
-            setDestinationname(res.credentials.name);
-            setDestinationDescription(res.credentials.description);
-            setDestinationFrame(res.credentials.frame);
-            setDestinationSouvenirNumber(res.credentials.total_certificates);
-          }
-        }
-      })
-      .catch((err) => {
-        setStatus("Unable to fetch data.");
-      });
-
-      getMyKYCStatus(user.userAccount).then((res) => {
-        console.log("Cliked")
-        console.log(user.userAccount)
-        if (res.status === "Success") {
-            user.setIsKYC(true);
-            user.setKycStatus(res.statusCode)
-            user.setComment(res.comment)
-            setInput(
-              {
-                name: res.data.name,
-                website: res.data.website,
-                email: res.data.email,
-                phone: res.data.contact,
-                CIN: res.data.regId,
-              }
-            )
-        }
-      });
-
-  }, [user]);
+  const [status, setStatus] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const [uploadedImageURL, setUploadedImageURL] = useState("");
+  const [selectedFrame, setSelectedFrame] = useState("");
+  const [assetName, setAssetName] = useState("");
+  const [assetDescription, setAssetDescription] = useState("");
+  const [recipient, setRecipient] = useState("");
+  const [addFrameopen, setAddFrameOpen] = useState(false);
+  const [previewOpen, setPreviewOpen] = useState(false);
 
   const saveImage = (file) => {
-    console.log("saving image...");
     setUploadedImage(file);
     let filereader = new FileReader();
     filereader.addEventListener("load", () => {
       setUploadedImageURL(filereader.result);
-    }); 
+    });
     filereader.readAsDataURL(file);
   };
 
-
-  //KYC Submit Handler
-  async function submit() {
-    let fieldcheck = checkEmptyFields();
-    if (fieldcheck) {
-      // let souvenirfileraw = await addFrame();
-      // console.log(input,uploadedImage);
-      return { status:"Success"};
-
-      // if (souvenirfileraw !== "Server error") {
-      //   let souvenirfile = await createfilefromraw(souvenirfileraw);
-
-      //   await uploadsouvenir(souvenirfile);
-      // } else {
-      //   setStatus("Something went wrong. Please try again");
-      // }
+  const submitHandler = () => {
+    setStatus("");
+    if (!checkForEmptyData()) return;
+    else if (!checkForFileSize()) return;
+    else {
+      uploadImage();
     }
-  }
+  };
 
-
-  //KYC Check Empty Fields
-  const checkEmptyFields = () => {
-    setStatus("Submitting...");
-    if (
-      input.name === "" ||
-      input.website === "" ||
-      input.email === "" ||
-      input.phone === "" ||
-      input.CIN === "" ||
-      input.IdProof === ""||
-      uploadedImage === ""
-
-    ) {
-      setStatus("*All fields are required.");
+  const checkForEmptyData = () => {
+    let isAddressValid = true;
+    try {
+      isAddressValid = ethers.utils.getAddress(recipient);
+    } catch {
+      isAddressValid = false;
+    }
+    if (assetName === "") {
+      setStatus("Asset name is required.");
+      return false;
+    } else if (assetDescription === "") {
+      setStatus("Asset description is required");
+      return false;
+    } else if (!isAddressValid) {
+      setStatus("Invalid recipient address");
+      return false;
+    } else if (uploadedImage === null) {
+      setStatus("Image is required.");
+      return false;
+    } else if (uploadedImage.size === undefined) {
+      setStatus("Invalid Image");
       return false;
     } else {
       return true;
     }
   };
 
-
-  //alert("KYC Submitted Successfully");
-  var close = document.getElementsByClassName("closebtn");
-  var i;
-
-  for (i = 0; i < close.length; i++) {
-  close[i].onclick = function(){
-    var div = this.parentElement;
-    div.style.opacity = "0";
-    setTimeout(function(){ div.style.display = "none"; }, 200);
-  }
-  }
-
-
-
-
-  const uploadsouvenir = async (souvenirfile) => {
-    setStatus("Issuing souvenir...");
-    let souvenirName = document.getElementById("souvenirname").value;
-    let recipientAddress = document.getElementById("recipientaddress").value;
-    let description = document.getElementById("description").value;
-
-    await uploadSouvenir(
-      recipientAddress,
-      souvenirName,
-      description,
-      souvenirfile,
-      user.userAccount
-    )
-      .then((res) => {
-        if (res.status === "Success") {
-          setStatus("Souvenir issued successfully.");
-        } else {
-          setStatus("Something went wrong. Please try again");
-        }
-      })
-      .catch((err) => {
-        setStatus("Something went wrong. Please try again");
-      });
-  };
-
-  const addFrame = async () => {
-    setStatus("Adding frame...");
-    return await createSouvenir(uploadedImage, destinationFrame)
-      .then((res) => {
-        if (res !== "Server error") {
-          return res;
-        } else {
-          return "Server error";
-        }
-      })
-      .catch((err) => {
-        setStatus("Something went wrong. Please try again");
-        return "Server error";
-      });
-  };
-
-  const createfilefromraw = async (rawfile) => {
-    return await rawfile.blob().then((blobResponse) => {
-      let filename = document.getElementById("souvenirname").value + ".png";
-
-      const myFile = new File([blobResponse], filename, {
-        type: blobResponse.type,
-      });
-      return myFile;
-    });
-  };
-
-  const uploadSouvenir = async (account, name, description, file, addedBy) => {
-    console.log("Uploading souvenir...");
-    let ipfsResponse = await create_metadata(file, name, description);
-    if (ipfsResponse.status === "Success") {
-      let image = ipfsResponse.imageURL;
-      let metadata = ipfsResponse.metadataURL;
-      return await addSouvenir(
-        account,
-        name,
-        description,
-        metadata,
-        image,
-        addedBy
-      );
+  const checkForFileSize = () => {
+    let filesize = parseFloat(uploadedImage.size) / 1024;
+    if (filesize <= 102400) {
+      return true;
     } else {
-      return { status: "Failed" };
+      setStatus("File should be less than 100MB in size.");
+      return false;
     }
   };
 
+  const uploadImage = () => {
+    console.log(selectedFrame);
+    setIsUploading(true);
+    nftApi({
+      account: user.userAccount,
+      image: uploadedImage,
+      asset_name: assetName,
+      asset_description: assetDescription,
+      recipient: recipient,
+      frame: selectedFrame,
+    })
+      .then(async (res) => {
+        setStatus("Uploaded Successfully.");
+        await user.poppulateUserData();
+        setIsUploading(false);
+      })
+      .catch((err) => {
+        setStatus("Something went wrong. Please try again.");
+        setIsUploading(false);
+      });
+  };
+
   return {
-    user,
-    uploadedImage,
-    uploadedImageURL,
-    isDestination,
-    destinationName,
-    destinationDescription,
-    destinationSouvenirNumber,
-    isloading,
     status,
+    isUploading,
+    uploadedImageURL,
+    selectedFrame,
+    setSelectedFrame,
+    assetName,
+    setAssetName,
+    assetDescription,
+    setAssetDescription,
+    recipient,
+    setRecipient,
     saveImage,
-    submit,
-    input,
-    setInput,
+    submitHandler,
+    addFrameopen,
+    setAddFrameOpen,
+    previewOpen,
+    setPreviewOpen,
   };
 };
 

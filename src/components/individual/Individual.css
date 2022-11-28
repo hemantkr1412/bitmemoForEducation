@@ -56,6 +56,15 @@ input {
   padding: 10px;
   margin: 0px;
 }
+select {
+  width: 100%;
+  max-width: 100%;
+  background-color: var(--secondary);
+  border: 1px solid var(--secondary);
+  border-radius: 5px;
+  padding: 10px;
+  margin: 0px;
+}
 
 input::placeholder {
   margin: 10px;
@@ -75,4 +84,29 @@ textarea {
 .instructiontext {
   width: 100%;
   max-width: 720px;
+}
+
+.previewPage {
+  width: 90vw;
+  height: 50.625vw;
+  position: relative;
+  background: transparent;
+}
+
+.previewPage img {
+  width: 90vw;
+  height: 50.625vw;
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.previewPage button {
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  animation: none;
+  color: var(--secondary);
+  background-color: var(--primary);
 }

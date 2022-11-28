@@ -14,22 +14,13 @@ import Individualinfo from "./components/learnmore/Individualinfo";
 import InstituteInfo from "./components/learnmore/InstituteInfo";
 import DestinationInfo from "./components/learnmore/DestinationInfo";
 import Privacypolicy from "./components/privacyPolicy/privacypolicy";
-import { KYCform } from "./components/souvenir/KYCform";
+// import { KYCform } from "./components/souvenir/KYCform";
 
 // context
 import UserState from "./context/userContext/userState";
 
 // router
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams,
-  Routes,
-} from "react-router-dom";
-
+import { Route, Routes } from "react-router-dom";
 import { HashRouter } from "react-router-dom";
 function App() {
   return (
@@ -44,7 +35,7 @@ function App() {
             <Route path="/view" element={<View />} />
             <Route path="/institution" element={<Institution />} />
             <Route path="/souvenir" element={<Souvenir />} />
-            <Route path="kycform" element={<KYCform />} />
+            {/* <Route path="kycform" element={<KYCform />} /> */}
             <Route path="/wallet" element={<NoWalletPage />} />
             <Route path="/connect" element={<Connect />} />
             <Route path="/contact" element={<Contact />} />

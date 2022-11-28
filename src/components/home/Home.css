@@ -121,7 +121,7 @@
 /* Description Section */
 
 .descriptionsectioncontainer {
-  min-height: 110vh;
+  min-height: 100vh;
   background-color: var(--secondary);
   background-image: url(./assets/whatisbitbackground.png);
   background-size: cover;
@@ -169,7 +169,7 @@
   justify-content: space-around;
   flex-wrap: wrap;
   padding: 100px 0px;
-  display: none;
+  /* display: none; */
 }
 
 .certificatesissued {

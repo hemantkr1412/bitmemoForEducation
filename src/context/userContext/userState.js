@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import UserContext from "./UserContext";
+import { userApi } from "../../components/Scripts/apiCalls";
 
 import { ethers } from "ethers";
 
@@ -8,32 +9,43 @@ const UserState = (props) => {
     window.ethereum != null
       ? new ethers.providers.Web3Provider(window.ethereum)
       : null;
-  const signer = provider != null ? provider.getSigner() : null;
-
   const [isConnected, setIsConnected] = useState(false);
   const [userAccount, setUserAccount] = useState("");
-  const [isKYC, setIsKYC] = useState(false);
-  const [kycStatus, setKycStatus] = useState("in_progress");
-  const [comment, setComment] = useState("");
- 
+  const [iswalletAvailable, setIsWalletAvailable] = useState(true);
+  const [userData, setUserData] = useState({});
 
-  useEffect(() => {
-    if (signer != null) {
-      signer
-        .getAddress()
-        .then((res) => {
-          setUserAccount(res);
-          setIsConnected(true);
-        })
-        .catch((err) => {
-          setIsConnected(false);
-        });
+  const poppulateUserAccount = () => {
+    setIsWalletAvailable(window.ethereum != null);
+    if (
+      window.ethereum !== null &&
+      window.ethereum.selectedAddress !== null &&
+      window.ethereum.selectedAddress !== ""
+    ) {
+      setIsConnected(true);
+      setUserAccount(window.ethereum.selectedAddress);
+      poppulateUserData(window.ethereum.selectedAddress);
     } else {
       setIsConnected(false);
+      setUserAccount("");
     }
-  });
+  };
 
-  const iswalletAvailable = window.ethereum != null;
+  const poppulateUserData = async () => {
+    await userApi({ account: window.ethereum.selectedAddress })
+      .then((res) => {
+        console.log(res);
+        setUserData(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      poppulateUserAccount();
+    }, 1000);
+  }, []);
 
   const login = async () => {
     await provider
@@ -42,35 +54,19 @@ const UserState = (props) => {
         setIsConnected(true);
       })
       .catch((err) => {});
-
-    if (signer != null) {
-      await signer
-        .getAddress()
-        .then((res) => {
-          setUserAccount(res);
-          setIsConnected(true);
-        })
-        .catch((err) => {
-          setIsConnected(false);
-        });
-    }
+    poppulateUserAccount();
   };
 
   return (
     <UserContext.Provider
       value={{
-        signer,
         provider,
         login,
         iswalletAvailable,
         isConnected,
         userAccount,
-        isKYC,
-        setIsKYC,
-        kycStatus,
-        setKycStatus,
-        comment,
-        setComment
+        userData,
+        poppulateUserData,
       }}
     >
       {props.children}
