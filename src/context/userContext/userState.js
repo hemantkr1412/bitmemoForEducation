@@ -5,10 +5,11 @@ import { userApi } from "../../components/Scripts/apiCalls";
 import { ethers } from "ethers";
 
 const UserState = (props) => {
-  const provider =
+  const [provider, setProvider] = useState(
     window.ethereum != null
       ? new ethers.providers.Web3Provider(window.ethereum)
-      : null;
+      : null
+  );
   const [isConnected, setIsConnected] = useState(false);
   const [userAccount, setUserAccount] = useState("");
   const [iswalletAvailable, setIsWalletAvailable] = useState(true);
@@ -16,6 +17,11 @@ const UserState = (props) => {
 
   const poppulateUserAccount = () => {
     setIsWalletAvailable(window.ethereum != null);
+    setProvider(
+      window.ethereum != null
+        ? new ethers.providers.Web3Provider(window.ethereum)
+        : null
+    );
     if (
       window.ethereum !== null &&
       window.ethereum.selectedAddress !== null &&
