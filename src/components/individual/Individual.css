@@ -110,3 +110,12 @@ textarea {
   color: var(--secondary);
   background-color: var(--primary);
 }
+
+.certverification {
+  padding: 0px 5px;
+  position: absolute;
+  left: 50%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  text-align: left;
+}

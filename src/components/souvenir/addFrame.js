@@ -19,8 +19,8 @@ function SimpleDialog(props) {
     setStatus("");
     userApi({
       account: user.userAccount,
-      frames: { file: selectedFrame, name: frameName },
       file: selectedFrame,
+      frames: true,
       frame_name: frameName,
     })
       .then(async (res) => {

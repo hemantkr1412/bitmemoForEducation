@@ -1,0 +1,127 @@
+.dashboardpage {
+  background-color: var(--primary);
+  min-height: 90vh;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.dashboardcontainer {
+  width: 100%;
+  max-width: 1080px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary);
+  padding: 20px;
+}
+
+.sectionheading {
+  width: 100%;
+  text-align: left;
+  border-bottom: 1px solid var(--secondary);
+}
+
+.primarydatacontainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0px;
+}
+
+.userdetail {
+  width: 100%;
+  max-width: 500px;
+}
+
+.userdetails {
+  width: 100%;
+  height: 40px;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  align-items: center;
+  word-break: break-word;
+}
+
+.certificatesectioncontainer {
+  width: 100%;
+  background-color: var(--primary);
+  background-image: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 50px 0px;
+}
+
+.certificatesissued {
+  width: 200px;
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: var(--secondary);
+  color: var(--primary);
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 20px 1px var(--primary);
+}
+
+.certificatesissued .heading2 {
+  font-size: large;
+  font-weight: 800;
+}
+.certificatesissued .heading3 {
+  font-size: 50px;
+  font-weight: 600;
+}
+
+.certContainer {
+  margin: 20px 0px;
+  width: 100%;
+  min-height: 300px;
+  border: 1px solid var(--secondary);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.framecard {
+  margin: 20px;
+  width: 250px;
+}
+
+.framepreview {
+  width: 250px;
+  height: 180px;
+  /* border: 1px solid white; */
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.framepreview img {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.framebuttons {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.framecard h4 {
+  text-align: center;
+  margin: 5px;
+}

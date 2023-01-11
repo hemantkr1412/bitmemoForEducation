@@ -72,7 +72,10 @@ const SouvenirScript = () => {
   };
 
   const uploadImage = () => {
+    let frameNameItems = selectedFrame.split("/");
+    let frameName = frameNameItems[frameNameItems.length - 1];
     console.log(selectedFrame);
+    console.log(frameName);
     setIsUploading(true);
     nftApi({
       account: user.userAccount,
@@ -80,7 +83,7 @@ const SouvenirScript = () => {
       asset_name: assetName,
       asset_description: assetDescription,
       recipient: recipient,
-      frame: selectedFrame,
+      frame: frameName,
     })
       .then(async (res) => {
         setStatus("Uploaded Successfully.");

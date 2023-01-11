@@ -1,19 +1,23 @@
 import "./Institution.css";
-import certificate1 from "./assets/certificate1.png";
-import certificate2 from "./assets/certificate2.png";
-import certificate3 from "./assets/certificate3.png";
-import certificate4 from "./assets/certificate4.png";
-import certificate5 from "./assets/certificate5.png";
 import UserContext from "../../context/userContext/UserContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import NoWalletPage from "../connection/NoWalletPage";
 import Connect from "../connection/Connect";
 import KYC from "../kyc/kyc";
+import CertDesigner from "./certDesigner";
+import CertDataForm from "./certDataForm";
+import ForwardIcon from "@mui/icons-material/Forward";
+import DesignServicesIcon from "@mui/icons-material/DesignServices";
 
 export const Institution = () => {
   const user = useContext(UserContext);
+  const [isDesigner, setIsDesigner] = useState(false);
+  const [isCertDataForm, setIsCertDataForm] = useState(false);
 
- if (!user.iswalletAvailable) {
+  const [certNumber, setCertNumber] = useState(0);
+  const [certData, setCertData] = useState({});
+
+  if (!user.iswalletAvailable) {
     return <NoWalletPage />;
   }
 
@@ -25,23 +29,67 @@ export const Institution = () => {
     return <KYC />;
   }
 
-
+  if (isDesigner) {
+    return (
+      <div className="institutepage">
+        <CertDesigner setOpen={setIsDesigner} />
+      </div>
+    );
+  }
+  if (isCertDataForm) {
+    return (
+      <div className="institutepage">
+        <CertDataForm
+          setOpen={setIsCertDataForm}
+          certNumber={certNumber}
+          certData={certData}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="institutepage">
-      <div className="heading">
-        Please contact us to issue certificates in bulk.
-      </div>
-      <div className="emailfield">Email: support@beimagine.tech</div>
-      <div className="samplecertificates">
-        <div className="heading">Sample Certificates:</div>
-        <div className="certificatecontainer">
-          <img src={certificate1} alt="Sample certificate" />
-          <img src={certificate2} alt="Sample certificate" />
-          <img src={certificate3} alt="Sample certificate" />
-          <img src={certificate4} alt="Sample certificate" />
-          <img src={certificate5} alt="Sample certificate" />
-        </div>
+      <h1>Issue Certificates</h1>
+      <div className="instituteLandingForm">
+        <label htmlFor="template-selector">Select Template:</label>
+        <select name="template-selector" id="template-selector">
+          {Object.keys(user.userData.certificates).map((cert) => (
+            <option
+              value={user.userData.certificates[cert]["name"]}
+              key={user.userData.certificates[cert]["name"]}
+            >
+              {user.userData.certificates[cert]["name"]}
+            </option>
+          ))}
+        </select>
+        <h3>Or</h3>
+        <button onClick={() => setIsDesigner(true)}>
+          Create New Template
+          <DesignServicesIcon sx={{ fontSize: 20, marginLeft: "10px" }} />
+        </button>
+        <label htmlFor="certificate-number-selector">
+          No. of certificates:
+        </label>
+        <input
+          type="number"
+          id="certificate-number-selector"
+          placeholder="Enter number"
+          value={certNumber}
+          onChange={(e) => setCertNumber(e.target.value)}
+        />
+        <h4>Enter individual values next</h4>
+        <button
+          onClick={() => {
+            let certName = document.getElementById("template-selector").value;
+            let certData = user.userData.certificates[certName];
+            setCertData(certData);
+            setIsCertDataForm(true);
+          }}
+        >
+          Next
+          <ForwardIcon sx={{ fontSize: 20, marginLeft: "5px" }} />
+        </button>
       </div>
     </div>
   );

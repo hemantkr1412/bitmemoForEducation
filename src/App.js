@@ -14,7 +14,9 @@ import Individualinfo from "./components/learnmore/Individualinfo";
 import InstituteInfo from "./components/learnmore/InstituteInfo";
 import DestinationInfo from "./components/learnmore/DestinationInfo";
 import Privacypolicy from "./components/privacyPolicy/privacypolicy";
-// import { KYCform } from "./components/souvenir/KYCform";
+import Verify from "./components/verify/verify";
+import VerifyWithDetails from "./components/verify/verifyWithDetails";
+import Dashboard from "./components/dashboard/dashboard";
 
 // context
 import UserState from "./context/userContext/userState";
@@ -48,6 +50,12 @@ function App() {
             <Route path="/destinationinfo" element={<DestinationInfo />} />
             <Route path="/:page" element={<Home />} />
             <Route path="/privacypolicy" element={<Privacypolicy />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/verify" element={<Verify />} />
+            <Route
+              path="/verify/:contractAddress/:tokenId"
+              element={<VerifyWithDetails />}
+            />
           </Routes>
           <Footer />
         </UserState>

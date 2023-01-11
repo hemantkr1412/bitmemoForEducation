@@ -96,6 +96,12 @@ export default function UserDetails(props) {
                       {user.status === "in_progress" && (
                         <button
                           onClick={() => {
+                            console.log({
+                              account: user.account,
+                              admin: appuser.userAccount,
+                              status: "Approved",
+                              comment: "",
+                            });
                             userApi({
                               account: user.account,
                               admin: appuser.userAccount,

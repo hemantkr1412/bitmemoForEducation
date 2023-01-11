@@ -10,30 +10,207 @@
   min-height: 80vh;
 }
 
-.institutepage .heading {
-  font-size: larger;
-  margin: 20px;
-}
-
-.institutepage .emailfield {
-  font-size: larger;
-  font-weight: 800;
-}
-.samplecertificates {
-  margin: 40px 0px;
-}
-
-.certificatecontainer {
+.designCertPage {
+  width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.certDesigner {
+  width: 100%;
+  max-width: 1080px;
+  aspect-ratio: 3/2;
+  background-color: aliceblue;
+  border-radius: 10px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.certIssueFormContainer {
+  width: 100%;
+  max-width: 1080px;
+}
+
+.certDesigner input {
+  background-color: transparent;
+  border: none;
+  width: 85%;
+  text-align: center;
+  margin: 0px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+.certDesigner input[type="text"] {
+  color: inherit;
+}
+
+.certDesigner input:focus {
+  outline: none;
+}
+
+.certDesigner img {
+  position: absolute;
+}
+
+.signcontainer {
+  /* background-color: rgba(131, 34, 4, 0.1); */
+  position: absolute;
+  bottom: 20px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.signcontainer input {
+  width: 100%;
+  position: relative;
+  padding: 0px;
+}
+
+.signcontainer img {
+  position: relative;
+}
+
+.certDesigner img:hover {
+  animation: shadowflip 0.5s;
+}
+
+@keyframes shadowflip {
+  from {
+    box-shadow: -1px -1px 2px 1px rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  to {
+    box-shadow: 1px 1px 2px 1px rgb(0, 0, 0);
+    background-color: transparent;
+  }
+}
+
+.colorPicker {
+  background-color: black;
+  color: white;
+  z-index: 2;
+  position: absolute;
+  top: "30px";
+  left: "400px";
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  animation: swiperight 0.5s;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
+}
+
+@keyframes swiperight {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.palette {
+  left: 10px;
+  top: 40%;
+}
+
+.certPreviewForm {
+  width: 100%;
+  max-width: 750px;
+  border: 1px solid white;
+  border-radius: 20px;
+  margin: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.certPreviewForm label {
+  margin: 10px;
+  width: 50%;
+}
+.certPreviewForm input {
+  margin: 10px;
+  width: 50%;
+}
+
+.buttonContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.instituteLandingForm {
+  width: 100%;
+  max-width: 750px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.certDataFormContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 3fr 3fr 4fr 1fr 1fr;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.certDataFormContainer input {
+  width: 90%;
+}
+.certDataFormContainer textarea {
+  width: 90%;
+  height: 20px;
+}
+
+.exceltable {
+  width: 100%;
   margin: 20px 0px;
 }
 
-.certificatecontainer img {
-  height: 200px;
-  width: 280px;
-  border-radius: 20px;
-  margin: 10px;
+.exceltable td {
+  height: 30px;
+  background-color: var(--secondary);
+  color: var(--primary);
+  padding: 0px;
+  width: 100px;
+}
+
+.exceltable textarea {
+  width: 99%;
+  height: 30px;
+  border: none;
+  border-radius: 0px;
+  margin: 0px;
+  padding: 0px;
+
+  font-size: large;
+}
+
+.exceltable textarea:focus {
+  outline: none;
+}
+
+.resContainer {
+  width: 100%;
+  max-width: 1080px;
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr 1fr 1fr;
+  align-items: center;
+
+justify-items: center;
 }

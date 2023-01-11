@@ -1,0 +1,37 @@
+.verifypage {
+  background-color: var(--primary);
+  min-height: 90vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.verifycontainer {
+  max-width: 1080px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary);
+  padding: 20px;
+}
+
+.certDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.certDetails img {
+  width: 100%;
+  max-width: 1080px;
+  margin: 20px 0px;
+}
+.certDetails button {
+  display: flex;
+  align-items: center;
+}

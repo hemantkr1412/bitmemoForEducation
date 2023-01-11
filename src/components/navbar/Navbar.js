@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Navbar.css";
 import menu from "./assets/menu.svg";
 import logo from "../assets/logo.png";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import UserContext from "../../context/userContext/UserContext";
@@ -68,6 +69,15 @@ const Navbar = () => {
         <div
           className="menuitem"
           onClick={() => {
+            navigate("/verify");
+            setIsMenu(false);
+          }}
+        >
+          Verify
+        </div>
+        <div
+          className="menuitem"
+          onClick={() => {
             navigate("/contact");
             setIsMenu(false);
           }}
@@ -91,6 +101,9 @@ const Navbar = () => {
         </div>
         <div className="navbutton" onClick={() => navigate("/souvenir")}>
           Souvenirs
+        </div>
+        <div className="navbutton" onClick={() => navigate("/verify")}>
+          Verify
         </div>
       </div>
       <div className="menucontainer">
@@ -116,7 +129,12 @@ const Navbar = () => {
         </div>
         {user.iswalletAvailable ? (
           user.isConnected ? (
-            <div className="connected">Connected</div>
+            <div className="whitebutton">
+              <button onClick={() => navigate("/dashboard")}>
+                <DashboardIcon sx={{ fontSize: 20, marginRight: "5px" }} />
+                Dashboard
+              </button>
+            </div>
           ) : (
             <div className="whitebutton">
               <button
