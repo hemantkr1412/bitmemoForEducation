@@ -12,6 +12,7 @@ const CertDataFormRow = (props) => {
   const [variable1, setvariable1] = useState("");
   const [variable2, setvariable2] = useState("");
   const [walletAddress, setWalletAddress] = useState("");
+  const [email, setEmail] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const [rowStyle, setRowStyle] = useState("1fr 3fr 3fr 4fr 1fr 1fr");
@@ -27,10 +28,10 @@ const CertDataFormRow = (props) => {
     }
 
     if (certData["variable2"] === "" && certData["variable1"] === "")
-      setRowStyle("1fr 4fr 1fr 1fr");
+      setRowStyle("1fr 4fr 4fr 1fr 1fr");
     else if (certData["variable2"] === "" || certData["variable1"] === "")
-      setRowStyle("1fr 3fr 4fr 1fr 1fr");
-    else setRowStyle("1fr 3fr 3fr 4fr 1fr 1fr");
+      setRowStyle("1fr 3fr 4fr 4fr 1fr 1fr");
+    else setRowStyle("1fr 3fr 3fr 4fr 4fr 1fr 1fr");
   }, [walletAddress]);
 
   const uploadImage = (requestType) => {
@@ -42,6 +43,7 @@ const CertDataFormRow = (props) => {
       template: certData["name"],
       variable1: variable1,
       variable2: variable2,
+      email: email,
     })
       .then(async (res) => {
         if (requestType === "download") {
@@ -85,6 +87,12 @@ const CertDataFormRow = (props) => {
           id={"address-input-for-row-" + sno}
           value={walletAddress}
           onChange={(e) => setWalletAddress(e.target.value)}
+        />
+        <input
+          type="text"
+          id={"email-input-for-row-" + sno}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         {isValid ? (
           <>

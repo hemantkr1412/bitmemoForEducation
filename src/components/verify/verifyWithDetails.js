@@ -54,7 +54,12 @@ const VerifyWithDetails = () => {
       <div className="verifycontainer">
         {isVerified ? (
           <>
-            <VerifiedDetails userData={userData} nftData={nftData} />
+            <VerifiedDetails
+              userData={userData}
+              nftData={nftData}
+              contractAddress={contractAddress}
+              tokenId={tokenId}
+            />
           </>
         ) : (
           <>
@@ -70,7 +75,7 @@ const VerifyWithDetails = () => {
 export default VerifyWithDetails;
 
 const VerifiedDetails = (props) => {
-  const { userData, nftData } = props;
+  const { userData, nftData, contractAddress, tokenId } = props;
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
@@ -85,11 +90,20 @@ const VerifiedDetails = (props) => {
             Verified
             <Verified color="success" style={{ fontSize: 25 }} />
           </h1>
-          <h2>Issued by:</h2>
+          <h4 style={{ width: "100%", textAlign: "center", margin: "2.5px" }}>
+            Contract: {contractAddress}
+          </h4>
+          <h4 style={{ width: "100%", textAlign: "center", margin: "2.5px" }}>
+            Token Id: {tokenId}
+          </h4>
+          <h4 style={{ width: "100%", textAlign: "center", margin: "2.5px" }}>
+            20 Jan., 2023 | 16:45
+          </h4>
+          <h2 style={{ textDecoration: "underline" }}>Issued by:</h2>
           {userData["name"]}
           <span>{userData["description"]}</span>
           {userData["account"]}
-          <h2>Recipient:</h2>
+          <h2 style={{ textDecoration: "underline" }}>Recipient:</h2>
           {nftData["owner"]}
           {Object.keys(nftData).map((item) => {
             if (
