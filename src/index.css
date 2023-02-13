@@ -19,11 +19,20 @@ code {
     monospace;
 }
 
+html,
+body,
+#app,
+#app > div {
+  height: 100%;
+}
+
 :root {
   --primary: #59069a;
   --secondary: white;
   --tertiary: black;
   --tertiaryshade1: grey;
+  --darkshade1: rgba(0, 0, 0, 0.3);
+  --darkshade2: rgba(0, 0, 0, 0.6);
 }
 
 button {

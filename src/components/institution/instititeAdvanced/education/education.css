@@ -1,0 +1,29 @@
+.educationSector {
+  height: "100%";
+  min-height: 80vh;
+  width: 100%;
+}
+
+.educationnavbutton {
+  /* background-color: var(--darkshade1); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.educationnavbutton:hover {
+  background-color: var(--secondary);
+  color: var(--primary);
+}
+
+.educationsidebar {
+  background-color: var(--darkshade2);
+  height: "100%";
+  padding: "10px";
+}
+
+.educationsectorsidebar::-webkit-scrollbar {
+  display: none;
+}

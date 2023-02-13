@@ -17,6 +17,7 @@ import Privacypolicy from "./components/privacyPolicy/privacypolicy";
 import Verify from "./components/verify/verify";
 import VerifyWithDetails from "./components/verify/verifyWithDetails";
 import Dashboard from "./components/dashboard/dashboard";
+import InstitutesLandingPage from "./components/institution/instititeAdvanced/landingPage/landing";
 
 // context
 import UserState from "./context/userContext/userState";
@@ -35,7 +36,8 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/individual" element={<Individual />} />
             <Route path="/view" element={<View />} />
-            <Route path="/institution" element={<Institution />} />
+            {/* <Route path="/institution" element={<Institution />} /> */}
+            <Route path="/institution" element={<InstitutesLandingPage />} />
             <Route path="/souvenir" element={<Souvenir />} />
             {/* <Route path="kycform" element={<KYCform />} /> */}
             <Route path="/wallet" element={<NoWalletPage />} />
