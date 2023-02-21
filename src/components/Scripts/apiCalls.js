@@ -40,7 +40,7 @@ export const nftApi = async (data) => {
     .catch((err) => {
       return "Server error";
     });
-  console.log(response)
+  console.log(response);
   if (response.status !== "Success")
     throw Object.assign(new Error("Server error"), { code: 402 });
   return response.response;
@@ -100,5 +100,41 @@ export const verifyApi = async (data) => {
     throw Object.assign(new Error("Server error"), { code: 402 });
   return response.response;
 };
-
-
+export const templateApi = async (data) => {
+  const endpoint = "certificate";
+  const url = BASE_URL + endpoint;
+  let formData = new FormData();
+  Object.keys(data).map((item) => {
+    formData.append(item, data[item]);
+    return null;
+  });
+  const response = await fetch(url, { method: "POST", body: formData })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+      return "Server error";
+    });
+  if (response.status !== "Success")
+    throw Object.assign(new Error("Server error"), { code: 402 });
+  return response.response;
+};
+export const issueApi = async (data) => {
+  const endpoint = "issue";
+  const url = BASE_URL + endpoint;
+  let formData = new FormData();
+  Object.keys(data).map((item) => {
+    formData.append(item, data[item]);
+    return null;
+  });
+  const response = await fetch(url, { method: "POST", body: formData })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+      return "Server error";
+    });
+  if (response.status !== "Success")
+    throw Object.assign(new Error("Server error"), { code: 402 });
+  return response.response;
+};

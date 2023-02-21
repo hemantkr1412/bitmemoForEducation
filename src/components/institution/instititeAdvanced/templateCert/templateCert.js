@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 
 const TemplateCert = (props) => {
-  const { templateData, setView } = props;
-
+  const { templateData, setView, setCertData } = props;
   const [templateValues, setTemplateValues] = useState({});
 
   useEffect(() => {
     let myTemplateValues = {};
     templateData.variables.map((variable) => {
-      myTemplateValues[variable["variable"]] = "";
+      myTemplateValues[variable["name"]] = "";
     });
     setTemplateValues(myTemplateValues);
   }, [props]);
@@ -34,9 +33,10 @@ const TemplateCert = (props) => {
         padding: "50px 20px",
       }}
     >
+      <h2>{templateData.name}</h2>
       <div style={{ width: "100%", maxWidth: "720px", position: "relative" }}>
         <img
-          src={templateData.image}
+          src={templateData.base_image}
           alt={templateData.name}
           width="100%"
           style={{ top: "0px", left: "0px" }}
@@ -44,11 +44,17 @@ const TemplateCert = (props) => {
         />
         {templateData.variables.map((variable, index) => (
           <div
-            key={"template-certificate-value" + variable + index}
+            key={"template-certificate-value" + variable.name + index}
             style={{
               position: "absolute",
-              top: variable.y_pos + "%",
-              left: variable.x_pos + "%",
+              top:
+                parseFloat(
+                  parseFloat(variable.y_pos) - parseFloat(variable.height) / 2
+                ) + "%",
+              left:
+                parseFloat(
+                  parseFloat(variable.x_pos) - parseFloat(variable.width) / 2
+                ) + "%",
               color: variable.color,
               width: variable.width + "%",
               height: variable.height + "%",
@@ -56,7 +62,7 @@ const TemplateCert = (props) => {
               fontSize: getTextHeight(variable.height),
             }}
           >
-            {templateValues[variable.variable]}
+            {templateValues[variable.name]}
           </div>
         ))}
       </div>
@@ -74,23 +80,30 @@ const TemplateCert = (props) => {
             }}
           >
             <label
-              for={"template-certificate-variable" + variable.variable + index}
+              htmlFor={"template-certificate-variable" + variable.name + index}
             >
-              {variable.variable}:
+              {variable.name}:
             </label>
             <input
               type="text"
-              id={"template-certificate-variable" + variable.variable + index}
-              value={templateValues[variable.variable]}
+              id={"template-certificate-variable" + variable.name + index}
+              value={templateValues[variable.name]}
               onChange={(e) => {
                 let newTemplateValues = {};
-                newTemplateValues[variable.variable] = e.target.value;
+                newTemplateValues[variable.name] = e.target.value;
                 setTemplateValues({ ...templateValues, ...newTemplateValues });
               }}
             />
           </div>
         ))}
-      <button onClick={() => setView(2)}>Next {">"}</button>
+      <button
+        onClick={() => {
+          setCertData(templateData);
+          setView(2);
+        }}
+      >
+        Next {">"}
+      </button>
     </div>
   );
 };

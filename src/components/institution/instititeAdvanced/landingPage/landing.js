@@ -20,6 +20,7 @@ const InstitutesLandingPage = () => {
   const user = useContext(UserContext);
   const [isSidebar, setIsSidebar] = useState(false);
   const [view, setView] = useState(0);
+  const [certData, setCertData] = useState(null);
 
   const [sector, setSector] = useState({
     text: "Education",
@@ -160,9 +161,13 @@ const InstitutesLandingPage = () => {
               {view === 0 ? (
                 <Subscription setView={setView} />
               ) : view == 1 ? (
-                <Education setView={setView} />
+                <Education
+                  setView={setView}
+                  setCertData={setCertData}
+                  certData={certData}
+                />
               ) : (
-                <CertIssue setView={setView} />
+                <CertIssue setView={setView} certData={certData} />
               )}
             </div>
           )}

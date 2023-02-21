@@ -4,47 +4,21 @@ import WebIcon from "@mui/icons-material/Web";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 import SportsHandballIcon from "@mui/icons-material/SportsHandball";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import cert1 from "../../assets/certificate1.png";
-import cert2 from "../../assets/certificate2.png";
-import cert3 from "../../assets/certificate3.png";
-import cert4 from "../../assets/certificate4.png";
-import cert5 from "../../assets/certificate5.png";
-import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useState, useContext } from "react";
 import TemplateCert from "../templateCert/templateCert";
 import CertCreator from "../certCreator/certCreator";
 import Tooltip from "@mui/material/Tooltip";
+import { useEffect } from "react";
+import { templateApi } from "../../../Scripts/apiCalls";
+import UserContext from "../../../../context/userContext/UserContext";
 
-const Education = ({ setView }) => {
-  const recentTemplates = [cert1, cert2, cert3, cert4, cert5, cert1];
-  const freeTemplates = [cert1, cert2, cert3, cert4, cert5, cert1];
-  const paidTemplates = [cert1, cert2, cert3, cert4, cert5, cert1];
-
+const Education = ({ setView, certData, setCertData }) => {
+  const user = useContext(UserContext);
   const [isSidebar, setIsSidebar] = useState(true);
-
   const [isTemplateCreator, setIsTemplateCreator] = useState(false);
-
-  const [selectedTemplate, setSelectedTemplate] = useState({
-    image: cert1,
-    variables: [
-      {
-        variable: "Student Name",
-        x_pos: "10",
-        y_pos: "20",
-        width: "30",
-        height: "20",
-        color: "#000000",
-      },
-      {
-        variable: "Roll Number",
-        x_pos: "10",
-        y_pos: "60",
-        width: "20",
-        height: "10",
-        color: "#123123",
-      },
-    ],
-  });
+  const [selectedTemplate, setSelectedTemplate] = useState(certData);
+  const [category, setCategory] = useState("educational certificates");
 
   const navbuttons = [
     {
@@ -55,6 +29,7 @@ const Education = ({ setView }) => {
           <WebIcon />
         </div>
       ),
+      category: "educational certificates",
     },
     {
       text: "Badges (Educational)",
@@ -64,6 +39,7 @@ const Education = ({ setView }) => {
           <WorkspacePremiumIcon />
         </div>
       ),
+      category: "educational badges",
     },
     {
       text: "Certificates (Non Educational)",
@@ -73,6 +49,7 @@ const Education = ({ setView }) => {
           <WebIcon />
         </div>
       ),
+      category: "non educational certificates",
     },
     {
       text: "Badges (Non Educational)",
@@ -82,10 +59,12 @@ const Education = ({ setView }) => {
           <WorkspacePremiumIcon />
         </div>
       ),
+      category: "non educational badges",
     },
     {
       text: "Others",
       logo: <MoreHorizIcon />,
+      category: "others",
     },
   ];
 
@@ -103,6 +82,7 @@ const Education = ({ setView }) => {
                 maxWidth: "50px",
               }}
               key={"education-sector-nav-button-" + nav["text"]}
+              onClick={() => setCategory(nav["category"])}
             >
               <Tooltip title={nav["text"]} placement="right-start">
                 {nav["logo"]}
@@ -128,8 +108,13 @@ const Education = ({ setView }) => {
               padding: "10px",
             }}
           >
-            <button onClick={() => setIsTemplateCreator(true)}>
-              Import Custom Template
+            <button
+              onClick={() => {
+                setIsTemplateCreator(true);
+                setIsSidebar(false);
+              }}
+            >
+              Create Custom Template
             </button>
           </div>
 
@@ -152,24 +137,61 @@ const Education = ({ setView }) => {
             {isSidebar ? "<" : ">"}
           </div>
 
-          <TemplateContainer
-            templates={recentTemplates}
-            heading="Recently Used"
-          />
-          <TemplateContainer
-            templates={freeTemplates}
-            heading="Free Templates"
-          />
-          <TemplateContainer
-            templates={paidTemplates}
-            heading="Premium Templates"
-          />
+          <TemplateContainer subscription="user" />
+          <TemplateContainer subscription="free" />
+          <TemplateContainer subscription="premium" />
         </div>
       </div>
     );
   };
 
-  const TemplateContainer = ({ templates, heading }) => {
+  const TemplateContainer = ({ subscription }) => {
+    const [templates, setTemplates] = useState([]);
+    const [startIndex, setStartIndex] = useState(0);
+
+    const deleteTemplate = async (template) => {
+      setTemplates((prev) => {
+        let index = prev.indexOf(template);
+        prev.splice(index, 1);
+        return prev;
+      });
+
+      templateApi({
+        request_type: "delete",
+        account: user.userAccount,
+        id: template.id,
+      })
+        .then((res) => {})
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    const heading =
+      subscription === "user"
+        ? "Recently Used"
+        : subscription === "free"
+        ? "Free Templates"
+        : "Premium Templates";
+
+    useEffect(() => {
+      templateApi({
+        request_type: "read",
+        account: user.userAccount,
+        from_index: startIndex,
+        to_index: startIndex + 6,
+        sector: "education",
+        category: category,
+        subscription: subscription,
+      })
+        .then((res) => {
+          setTemplates([...templates, ...res]);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, [startIndex]);
+
     return (
       <>
         <div
@@ -192,13 +214,36 @@ const Education = ({ setView }) => {
         >
           {templates.map((template) => (
             <div
-              key={template}
+              key={template.id + "template-sidebar-template"}
               onClick={() => {
                 setSelectedTemplate(template);
                 setIsTemplateCreator(false);
+                setCertData(template);
               }}
+              className="templateselector"
+              style={{ position: "relative" }}
             >
-              <img src={template} alt="Template" width="150px" />
+              <img src={template.base_image} alt="Template" width="150px" />
+              {subscription === "user" && (
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "0px",
+                    right: "0px",
+                    background: "black",
+                    width: "20px",
+                    height: "30px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <DeleteIcon
+                    color="primary"
+                    onClick={() => deleteTemplate(template)}
+                  />
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -207,7 +252,12 @@ const Education = ({ setView }) => {
             padding: "10px",
           }}
         >
-          <button style={{ padding: "5px" }}>More...</button>
+          <button
+            style={{ padding: "5px" }}
+            onClick={() => setStartIndex((prev) => prev + 6)}
+          >
+            More...
+          </button>
         </div>
       </>
     );
@@ -221,18 +271,50 @@ const Education = ({ setView }) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "flex-start",
           height: window.innerHeight - 50 + "px",
+          overflowY: "scroll",
         }}
       >
         {isTemplateCreator ? (
-          <CertCreator setView={setView} />
+          <CertCreator
+            setIsTemplateCreator={setIsTemplateCreator}
+            setSelectedTemplate={setSelectedTemplate}
+          />
         ) : (
           <>
             {selectedTemplate === null ? (
-              <div>Select Template</div>
+              <div
+                style={{
+                  marginTop: "50px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+              >
+                <h2>Select Template</h2>
+                <h3>
+                  {" "}
+                  {"<< "}Select a ready made template from the templates section{" "}
+                </h3>
+                <h3>OR</h3>
+                <button
+                  onClick={() => {
+                    setIsTemplateCreator(true);
+                    setIsSidebar(false);
+                  }}
+                >
+                  Create Custom Template
+                </button>
+              </div>
             ) : (
-              <TemplateCert templateData={selectedTemplate} setView={setView} />
+              <TemplateCert
+                templateData={selectedTemplate}
+                setView={setView}
+                setCertData={setCertData}
+              />
             )}
           </>
         )}
