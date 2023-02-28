@@ -3,6 +3,7 @@ import { issueApi } from "../../../Scripts/apiCalls";
 import UserContext from "../../../../context/userContext/UserContext";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import Subscription from "../subscription/subscription";
 
 const CertIssue = ({ setView, certData }) => {
   const user = useContext(UserContext);
@@ -10,6 +11,7 @@ const CertIssue = ({ setView, certData }) => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [uploadedFileName, setUploadedFileName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubscription, setIsSubscription] = useState(false);
   const [status, setStatus] = useState("");
 
   const download = function (data) {
@@ -62,6 +64,7 @@ const CertIssue = ({ setView, certData }) => {
         } else if (res === "pending approval") {
           setStatus("Certificate order sent for approval.");
         }
+        user.poppulateUserData();
         console.log(res);
       })
       .catch((err) => {
@@ -70,6 +73,14 @@ const CertIssue = ({ setView, certData }) => {
         alert("Something went wrong. Please check the data.");
       });
   };
+
+  const limitExceeded = certNumber > parseInt(user.userData.nft_quota);
+
+  if (parseInt(user.userData.nft_quota) === 0)
+    return <Subscription back={() => setIsSubscription(false)} />;
+
+  if (isSubscription)
+    return <Subscription back={() => setIsSubscription(false)} />;
 
   if (isLoading) return <LoadingPage status={status} setView={setView} />;
 
@@ -83,6 +94,7 @@ const CertIssue = ({ setView, certData }) => {
       }}
     >
       <h1>Issue Certificates</h1>
+
       <div style={{ width: "500px" }}>
         <label htmlFor="cert-number-input-for-issue">No. of certificates</label>
         <input
@@ -91,6 +103,15 @@ const CertIssue = ({ setView, certData }) => {
           value={certNumber}
           onChange={(e) => setCertNumber(e.target.value)}
         />
+        {limitExceeded && (
+          <div className="error">
+            Certificate limit exceeded. Current limit ={" "}
+            {user.userData.nft_quota}
+            <button onClick={() => setIsSubscription(true)}>
+              Increase limit
+            </button>
+          </div>
+        )}
 
         <h3>Upload CSV file</h3>
         <input
@@ -125,6 +146,10 @@ const CertIssue = ({ setView, certData }) => {
         <button onClick={() => setView(1)}>{"< "} Back</button>
         <button
           onClick={() => {
+            if (limitExceeded) {
+              setIsSubscription(true);
+              return;
+            }
             uploadFile();
           }}
         >

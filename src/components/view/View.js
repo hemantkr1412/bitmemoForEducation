@@ -22,13 +22,6 @@ const View = () => {
       return (
         <>
           <h2>No NFTs found.</h2>
-          <button
-            onClick={() => {
-              navigate("/individual");
-            }}
-          >
-            Create NFTs
-          </button>
         </>
       );
     }

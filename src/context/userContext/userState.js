@@ -14,6 +14,7 @@ const UserState = (props) => {
   const [userAccount, setUserAccount] = useState("");
   const [iswalletAvailable, setIsWalletAvailable] = useState(true);
   const [userData, setUserData] = useState({});
+  const [isSidebar, setIsSidebar] = useState(1);
 
   const poppulateUserAccount = () => {
     setIsWalletAvailable(window.ethereum != null);
@@ -73,6 +74,8 @@ const UserState = (props) => {
         userAccount,
         userData,
         poppulateUserData,
+        isSidebar,
+        setIsSidebar,
       }}
     >
       {props.children}

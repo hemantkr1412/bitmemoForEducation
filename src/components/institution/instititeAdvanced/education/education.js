@@ -41,36 +41,36 @@ const Education = ({ setView, certData, setCertData }) => {
       ),
       category: "educational badges",
     },
-    {
-      text: "Certificates (Non Educational)",
-      logo: (
-        <div>
-          <SportsHandballIcon />
-          <WebIcon />
-        </div>
-      ),
-      category: "non educational certificates",
-    },
-    {
-      text: "Badges (Non Educational)",
-      logo: (
-        <div>
-          <SportsHandballIcon />
-          <WorkspacePremiumIcon />
-        </div>
-      ),
-      category: "non educational badges",
-    },
-    {
-      text: "Others",
-      logo: <MoreHorizIcon />,
-      category: "others",
-    },
+    // {
+    //   text: "Certificates (Non Educational)",
+    //   logo: (
+    //     <div>
+    //       <SportsHandballIcon />
+    //       <WebIcon />
+    //     </div>
+    //   ),
+    //   category: "non educational certificates",
+    // },
+    // {
+    //   text: "Badges (Non Educational)",
+    //   logo: (
+    //     <div>
+    //       <SportsHandballIcon />
+    //       <WorkspacePremiumIcon />
+    //     </div>
+    //   ),
+    //   category: "non educational badges",
+    // },
+    // {
+    //   text: "Others",
+    //   logo: <MoreHorizIcon />,
+    //   category: "others",
+    // },
   ];
 
   const Sidebar = () => {
     return (
-      <div style={{ display: "flex", position: "relative" }}>
+      <div style={{ display: "flex", position: "relative",height:"100%" }}>
         <div style={{ width: "50px", backgroundColor: "var(--darkshade2)" }}>
           {navbuttons.map((nav) => (
             <div
@@ -185,6 +185,8 @@ const Education = ({ setView, certData, setCertData }) => {
         subscription: subscription,
       })
         .then((res) => {
+          console.log("---------------------------------------");
+          console.log(res);
           setTemplates([...templates, ...res]);
         })
         .catch((err) => {
@@ -275,11 +277,13 @@ const Education = ({ setView, certData, setCertData }) => {
           height: window.innerHeight - 50 + "px",
           overflowY: "scroll",
         }}
+        className="educationmainpage"
       >
         {isTemplateCreator ? (
           <CertCreator
             setIsTemplateCreator={setIsTemplateCreator}
             setSelectedTemplate={setSelectedTemplate}
+            sector="education"
           />
         ) : (
           <>

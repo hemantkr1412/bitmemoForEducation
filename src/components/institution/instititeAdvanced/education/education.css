@@ -33,3 +33,7 @@
   animation: scaleup 0.5s linear;
   box-shadow: 0px 0px 10px 2px white;
 }
+
+.educationmainpage::-webkit-scrollbar {
+  display: none;
+}

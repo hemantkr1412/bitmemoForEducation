@@ -128,3 +128,10 @@
     display: none;
   }
 }
+.greenbtn {
+  background-color: rgb(6, 50, 6);
+  color: var(--secondary);
+  border: 1px solid var(--secondary);
+  font-family: coolvetica;
+  font-size: large;
+}

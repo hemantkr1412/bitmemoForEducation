@@ -11,9 +11,15 @@ const KycScript = (setForm) => {
   const [description, setdescription] = useState(user.userData.description);
   const [website, setwebsite] = useState(user.userData.website);
   const [email, setemail] = useState(user.userData.email);
-  const [contact, setcontact] = useState(user.userData.contact);
+  const [contact, setcontact] = useState(parseInt(user.userData.contact));
   const [regId, setregId] = useState(user.userData.regId);
   const [idProof, setidProof] = useState("");
+  const [approvers, setApprovers] = useState(user.userData.approvers);
+  const [issuerName, setIssuerName] = useState("");
+  const [country, setcountry] = useState("");
+  const [issuerJobDesignation, setIssuerJobDesignation] = useState("");
+  const [idProofApprovers, setIdProofApprovers] = useState("");
+  const [noteSignByHigherAuth, setNoteSignByHigherAuth] = useState("");
 
   const handleSubmit = () => {
     setStatus("");
@@ -29,9 +35,10 @@ const KycScript = (setForm) => {
       website === "" ||
       email === "" ||
       contact === "" ||
-      regId === "" ||
       idProof === ""
     ) {
+
+    
       setStatus("* marked fields are required.");
       return false;
     } else {
@@ -45,11 +52,15 @@ const KycScript = (setForm) => {
       account: user.userAccount,
       name: name,
       description: description,
+      // country: country,
+      // issuerName: issuerName,
+      // issuerDesignation: issuerJobDesignation,
       website: website,
       email: email,
       contact: contact,
       regId: regId,
       idProof: idProof,
+      approvers: JSON.stringify(approvers),
     })
       .then(async (res) => {
         setisuploading(false);
@@ -81,6 +92,19 @@ const KycScript = (setForm) => {
     idProof,
     setidProof,
     handleSubmit,
+    approvers,
+    setApprovers,
+    issuerName,
+    setIssuerName,
+    country,
+    setcountry,
+    issuerJobDesignation,
+    setIssuerJobDesignation,
+    idProofApprovers,
+    setIdProofApprovers,
+    noteSignByHigherAuth,
+    setNoteSignByHigherAuth,
+    
   };
 };
 

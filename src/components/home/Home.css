@@ -1,6 +1,6 @@
 /* About section */
 .aboutSectionContainer {
-  background-image: url(./assets/aboutsectionbackground.png);
+  background-image: url(./assets/aboutsectionbackground.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -8,6 +8,7 @@
   background-color: var(--primary);
   color: var(--secondary);
   padding: 40px 20px;
+  max-width: 1950px;
 }
 
 .aboutsection {
@@ -44,7 +45,7 @@
 
 .aboutsection .illustration img {
   height: 100%;
-  width: 450px;
+  width: 650px;
 }
 .aboutsectionmobile .illustration img {
   height: 100%;
@@ -77,12 +78,12 @@
   font-size: 3.5rem;
 }
 .aboutsection .secondheading {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: 10;
 }
 .aboutsectionmobile .secondheading {
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-weight: 10;
 }
 
@@ -121,40 +122,66 @@
 /* Description Section */
 
 .descriptionsectioncontainer {
+  position: relative;
+  width: 100%;
   min-height: 100vh;
   background-color: var(--secondary);
-  background-image: url(./assets/whatisbitbackground.png);
+  background-image: url(./assets/whitewithpattern.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: left center;
   color: var(--tertiary);
-  padding: 100px;
+  max-width: 1950px;
+  /* padding: 100px; */
+  /* padding-top:100px ; */
 }
 
 .descriptionsection {
+  width: 80%;
   height: 100%;
+  /* margin: 50px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 500px;
+  /* max-width: 500px; */
   text-align: left;
   line-height: 25px;
+  padding: 100px;
 }
 @media only screen and (max-width: 600px) {
   .descriptionsection {
     text-align: center;
   }
+  /* .descriptionsection .writing .heading{
+    font-size: 0.2rem;
+  } */
 }
 
 .descriptionsection .writing .heading {
   color: var(--primary);
-  font-weight: 800;
-  font-size: 2rem;
-  margin: 40px 0px;
-  border-bottom: 1px solid var(--primary);
-  font-family: coolvetica;
+  font-weight: 500;
+  font-size: 5em;
+  font-family:coolvetica;
+  /* margin: 40px 0px; */
+  /* border-bottom: 1px solid var(--primary); */
+  /* font-family: coolvetica; */
 }
+.descriptionsection .writing{
+  width: 100%;
+}
+
+.descriptionsection .heading{
+  width: 100%;
+  height: 70px;
+}
+.descriptionsection #idheading{
+  width: 100%;
+  height: 70px;
+  border-bottom: 1px solid var(--primary);
+}
+
+
 
 /* Certificates section */
 
@@ -169,6 +196,7 @@
   justify-content: space-around;
   flex-wrap: wrap;
   padding: 100px 0px;
+  max-width: 1950px;
   /* display: none; */
 }
 
@@ -200,18 +228,38 @@
 /* How to use Section */
 
 .howtousecontainer {
-  background-color: var(--primary);
+  /* background-image: url(./assets/whybitmemoblue.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 90vh;
+  background-color: var(--primary); */
+  background-image: url(./assets/whybitmemorblue.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  /* background-color: var(--primary); */
   color: var(--secondary);
   display: flex;
   flex-direction: column;
   padding: 100px 0px;
+  max-width: 1950px;
 }
 
 .howtouseheading {
-  font-size: 2rem;
-  text-decoration: underline;
-  text-align: center;
-  font-family: coolvetica;
+  /* font-size: 4rem; */
+  /* text-decoration: underline; */
+  /* text-align: center; */
+  /* font-family: coolvetica; */
+  font-family: 'Coolvetica';
+font-style: normal;
+font-weight: 400;
+font-size: 54.4065px;
+line-height: 53px;
+/* or 97% */
+
+letter-spacing: 0.03em;
+text-transform: capitalize;
 }
 
 .howtousesection {
@@ -267,11 +315,7 @@
 }
 
 /* -------- */
-.howtouseimageleft {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
+
 
 .howtousetextright {
   display: flex;
@@ -340,6 +384,10 @@
     align-items: center;
     justify-content: center;
   }
+  .descriptionsection .heading {
+    width: 100%;
+    height: 30px;
+  }
 }
 
 /* Solutions Section */
@@ -356,6 +404,7 @@
   color: var(--tertiary);
   text-align: center;
   padding: 50px 0px;
+  max-width: 1950px;
 }
 
 .solutionsheading {
@@ -459,7 +508,7 @@
   display: flex;
   flex-direction: column;
   margin: 20px 0px;
-  background-image: url(./assets/whybitbackground.png);
+  background-image: url(./assets/stepbackground.png);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 100% 100%;
@@ -467,30 +516,86 @@
   justify-content: center;
   align-items: center;
   height: 1200px;
+  max-width: 1950px;
 }
 
-.whybitcontainer .heading {
+/* .whybitcontainer .heading {
   color: var(--primary);
   font-size: 1.5rem;
   font-family: coolvetica;
   padding: 20px;
-}
+} */
 
 .benefitscontainer {
   margin: 40px 0px;
 }
 
 .benefit {
-  background-color: var(--primary);
+  /* background-color: var(--primary);
   width: 350px;
-  padding: 30px 0px;
+  height: 40px;
+  padding: 30px 0px;*/
   color: var(--secondary);
-  font-family: coolvetica;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75); */
+
+  width: 422px;
+  height: 109px;
+  left: 96px;
+  top: 2052px;
+
+  background: #58019B;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 28px;
+
+  font-family: 'Be Vietnam';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26.5462px;
+  line-height: 26px;
+  margin-right: 50px;
+/* identical to box height, or 97% */
+
+text-align: center;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+}
+.benefit2 {
+  background-color: var(--secondary);
+  width: 350px;
+  height: 40px;
+  padding: 30px 0px;
+  color: var(--primary);
   border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  border: var(--primary) 2px solid;
+
+  box-sizing: border-box;
+  width: 422px;
+  height: 109px;
+  left: 571px;
+  top: 2052px;
+
+  border: 4px solid #58019B;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 28px;
+  font-family: 'Be Vietnam';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26.5462px;
+  line-height: 26px;
+  /* identical to box height, or 97% */
+
+  text-align: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
+
 
 .benefit img {
   height: 40px;
@@ -510,6 +615,9 @@
   }
   .benefitdivider {
     width: 300px;
+  }
+  .whybitcontainer{
+    background-image: none;
   }
 }
 
@@ -544,4 +652,530 @@
 
 .whybitcontainer button {
   margin: 20px 0px;
+}
+.aboutsection .submainheading{
+  /* font-size: 7.5rem; */
+  /* color: var(--secondary); */
+  /* font-family: coolvetica; */
+  /* font-family: for thin font; */
+  /* font-family: 'Montserrat', sans-serif;
+  font-weight: -100; */
+  /* padding: 20px; */ 
+
+  font-family: 'Inter';
+font-style: normal;
+font-weight: 200;
+font-size: 7.5rem;
+line-height: 99px;
+/* identical to box height */
+
+letter-spacing: -0.05em;
+
+}
+.aboutsectionmobile .submainheading{
+  font-size: 4rem;
+  color: var(--secondary);
+  /* font-family: coolvetica; */
+  /* font-family: for thin font; */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: -100;
+  /* padding: 20px; */ 
+
+}
+.certificatesissued2 {
+  width: 348px;
+  height: 201px;
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: space-around;
+  /* text-align: center; */
+  background-color: var(--secondary);
+  color: var(--primary);
+  padding: 25px;
+  /* border-radius: 20px; */
+  background: #FFFFFF;
+  box-shadow: 0px 0px 20.0364px rgba(88, 1, 155, 0.5);
+  border-radius: 22.1455px;
+  /* box-shadow: 0px 0px 20px 1px var(--primary); */
+}
+.certificatesissued2 .heading1 {
+  /* font-size: 50px;
+  font-weight: 600;
+  font-family: 'Coolvetica'; */
+font-style: normal;
+font-weight: 400;
+font-size: 58.4124px;
+line-height: 57px;
+/* identical to box height, or 97% */
+
+letter-spacing: 0.03em;
+text-transform: capitalize;
+
+/* gredient */
+
+background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(180deg, #540196 25.02%, #DA1453 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-fill-color: transparent;
+  /* color: rgb(131,58,180); */
+  /* background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 92%, rgba(252,176,69,1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; */
+  
+}
+.certificatesissued2 .heading2 {
+  font-family: 'Coolvetica';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 25px;
+  /* identical to box height, or 98% */
+  
+  letter-spacing: 0.03em;
+  text-transform: capitalize;
+}
+.certificatesissued2 .heading3 {
+  /* font-family: 'Be Vietnam'; */
+font-style: normal;
+font-weight: 400;
+font-size: 13px;
+line-height: 19px;
+/* or 146% */
+
+letter-spacing: 0.03em;
+text-transform: capitalize;
+  color: black;
+}
+.certificatesectioncontainer2 {
+  /* background-color: var(--secondary); */
+  /* background-image: url(./assets/certificatesectionbackground.png); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left center;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* flex-wrap: wrap; */
+  /* display: none; */
+}
+
+.whybitmemoheading{
+  font-size: 1.3rem;
+  color: var(--secondary);
+  padding: 20px;
+  width: 50%;
+}
+.howtouseimageleft {
+  width: 800px;
+  height: 500px;
+  background-color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+.stepsheadingbtndiv{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.step{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* align-items: center; */
+  width: 300px;
+  height: 200px;
+  background-color: var(--secondary);
+  /* box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75); */
+}
+.step img{
+  width: 200px;
+  height: 120px;
+}
+.step .stepheading{
+  font-size: 1.5rem;
+  color: var(--primary);
+  font-weight: 600;
+  text-align: left;
+  margin-left: 16px;
+}
+.step .steptext{
+  font-size: 1.1rem;
+  color: var(--primary);
+  font-weight: 400;
+  /* padding: 100px; */
+  padding-left: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  text-align: left;
+}
+.stepscontainer{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 100px 0px;
+}
+.joinContainer {
+  background-color: var(--secondary);
+  color: var(--primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 100px 0px;
+  max-width: 1950px;
+}
+.joinContainerHeading {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+.join{
+  width: 300px;
+  height: 300px;
+  background-color: var(--secondary);
+  box-shadow: 0px 0px 10px 0px var(--primary);
+  border-radius: 10px;
+  margin: 40px;
+
+}
+.joinheading{
+  width: 100%;
+  height: 50%;
+  font-size: 50px;
+  font-weight: 600;
+  background-color: var(--primary);
+  color: var(--secondary);
+  border-radius: 10px 10px 0px 0px;
+  text-align: center;
+}
+.joinMainDiv{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+}
+.joiningfee{
+  position: absolute;
+  margin-top: 50px;
+  text-align: center;
+  margin-left: 80px;
+  
+}
+.joinbtn{
+  width: 200px;
+  height: 20px;
+  margin-top: 20px;
+  margin-left: 50px;
+  background-color: var(--primary);
+  color: var(--secondary);
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.certificatesectioncontainer2part1{
+  display: flex;
+  /* justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap; */
+  /* padding: 100px 0px; */
+  margin-left: 200px;
+}
+.certificatesectioncontainer2part2{
+  display: flex;
+  /* justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap; */
+  /* padding: 100px 0px; */
+  margin-left: 500px;
+}
+.whybitmemomaindiv{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding-left: 100px;
+  padding-right:100px ;
+}
+.whybitmemotext{
+  /* font-size: 1.1rem;
+  color: var(--secondary);
+  font-weight: 100; */
+  /* padding: 20px; */
+  padding-top: 20px;
+  width: 50%;
+  font-family: 'Arial';
+font-style: normal;
+font-weight: 400;
+font-size: 19.0762px;
+line-height: 22px;
+text-align: justify;
+letter-spacing: 0.03em;
+color: #FFFFFF;
+
+}
+.whybitcontainer .heading{
+
+  color: var(--primary);
+  font-family: 'Coolvetica';
+font-style: normal;
+font-weight: 400;
+font-size: 54.4065px;
+line-height: 53px;
+/* or 97% */
+
+letter-spacing: 0.03em;
+text-transform: capitalize;
+padding-right:1000px;
+border-bottom: 2px solid var(--primary);
+
+
+}
+.whybitcontainer .heading-1{
+  margin-top: 80px;
+  color: var(--primary);
+  font-family: 'Coolvetica';
+font-style: normal;
+font-weight: 400;
+font-size: 54.4065px;
+line-height: 53px;
+/* or 97% */
+
+letter-spacing: 0.03em;
+text-transform: capitalize;
+padding-right:1250px;
+}
+.subjoinheading2{
+  /* font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary);*/
+  margin-top: 20px;
+  padding: 0px 50px; 
+  font-family: 'Coolvetica';
+font-style: normal;
+font-weight: 400;
+font-size: 1.5rem;
+line-height: 24px;
+/* or 111% */
+
+letter-spacing: 0.03em;
+text-transform: uppercase;
+
+/* gredient */
+
+background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(180deg, #540196 25.02%, #DA1453 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-fill-color: transparent;
+}
+.whybitmemoArrow{
+  margin-top: 80px;
+}
+.stepText{
+  margin-top: 20px;
+  color: var(--primary);
+  font-family: 'Be Vietnam';
+font-style: normal;
+font-weight: 400;
+font-size: 23.9525px;
+line-height: 32px;
+padding-right: 290px;
+/* or 135% */
+
+letter-spacing: 0.03em;
+text-transform: uppercase;
+}
+.dollar{
+  font-size: 1rem;
+  color: var(--secondary);
+
+
+}
+.permonth{
+  font-size: 1rem;
+  color: var(--secondary);
+  margin: 10px;
+}
+@media only screen and (max-width: 600px) {
+  .certificatesissued2 {
+    width: 300px;
+    height: 150px;
+    margin: 20px;
+    padding: 20px;
+  }
+  .certificatesissued2 .heading1 {
+    font-size: 40px;
+  }
+  .certificatesissued2 .heading2 {
+    font-size: medium;
+  }
+  .certificatesissued2 .heading3 {
+    font-size: 15px;
+  }
+  .whybitmemomaindiv{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+  }
+  .whybitmemoheading{
+    font-size: 1.3rem;
+    color: var(--secondary);
+    padding: 20px;
+    width: 50%;
+    margin-left: 50px;
+  }
+  .howtouseimageleft {
+    width: 350px;
+    height: 200px;
+    background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin-left: 5px;
+  }
+  .howtouseheading{
+    font-size: 3rem;
+  }
+  .stepsheadingbtndiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .step{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* align-items: center; */
+    width: 300px;
+    height: 150px;
+    background-color: var(--secondary);
+
+  }
+  .step img{
+    width: 150px;
+    height: 90px;
+  }
+  .step .stepheading{
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .step .steptext{
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 400;
+  }
+  .stepscontainer{
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    /* padding: 100px 0px; */
+  }
+  .joinMainDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .descriptionsectioncontainer{
+    padding: 0px;
+    padding-top: 50px;
+  }
+  .descriptionsection{
+    margin: 0px;
+    padding: 0px;
+  }
+  .descriptionsection .writing .heading{
+    font-size: 2rem;
+    margin-left: 30px;
+
+
+  }
+  .certificatesectioncontainer2{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .certificatesectioncontainer2part2{
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+  }
+  .certificatesectioncontainer2part1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0px;
+  }
+  .whybitcontainer .heading{
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 0px;
+  }
+  .whybitmemomaindiv{
+    padding: 0px;
+  }
+  .whybitcontainer .heading{
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+  }
+  .benefit2{
+    width:300px ;
+    margin-top:150px;
+    margin-right: 10px;
+  }
+  .whybitcontainer .heading-1{
+    padding: 0px;
+  }
+  .whybitmemotext{
+    /* font-size: 1.1rem;
+    color: var(--secondary);
+    font-weight: 100; */
+    /* padding: 20px; */
+    padding-top: 20px;
+    width: 100%;
+    font-family: 'Arial';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19.0762px;
+  line-height: 22px;
+  text-align: justify;
+  letter-spacing: 0.03em;
+  color: #FFFFFF;
+  
+  }
+  .stepText{
+    margin-top: 20px;
+    color: var(--primary);
+    font-family: 'Be Vietnam';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 23.9525px;
+  line-height: 32px;
+  padding-right:0px;
+  /* or 135% */
+  
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  }
+
+  
 }

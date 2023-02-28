@@ -123,13 +123,13 @@ const InstitutesLandingPage = () => {
   const Navbar = () => {
     return (
       <div className="institutenavbar" style={{ left: "0px", height: "50px" }}>
-        <MenuIcon
+        {/* <MenuIcon
           fontSize="large"
           sx={{ margin: "0px 30px", "&:hover": { color: "var(--primary)" } }}
           onClick={() => setIsSidebar(!isSidebar)}
-        />
+        /> */}
         {sector["logo"]}
-        {sector["text"]}
+        Institution
       </div>
     );
   };
@@ -147,7 +147,7 @@ const InstitutesLandingPage = () => {
             <NoWalletPage />
           ) : !user.isConnected ? (
             <Connect />
-          ) : user.userData.status !== "Approved" ? (
+          ) : user.userData.status !== "in_progress" ? (
             <KYC />
           ) : (
             <div

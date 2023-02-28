@@ -30,7 +30,7 @@ const Navbar = () => {
         >
           Home
         </div>
-        <div
+        {/* <div
           className="menuitem"
           onClick={() => {
             navigate("/individual");
@@ -38,7 +38,7 @@ const Navbar = () => {
           }}
         >
           Individuals
-        </div>
+        </div> */}
         <div
           className="menuitem"
           onClick={() => {
@@ -90,8 +90,11 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="navbuttoncontainer">
-        <div className="navbutton" onClick={() => navigate("/individual")}>
+        {/* <div className="navbutton" onClick={() => navigate("/individual")}>
           Individuals
+        </div> */}
+        <div className="navbutton" onClick={() => navigate("/home")}>
+          Home
         </div>
         <div className="navbutton" onClick={() => navigate("/view")}>
           View
@@ -99,12 +102,12 @@ const Navbar = () => {
         <div className="navbutton" onClick={() => navigate("/institution")}>
           Institutions
         </div>
-        <div className="navbutton" onClick={() => navigate("/souvenir")}>
+        {/* <div className="navbutton" onClick={() => navigate("/souvenir")}>
           Souvenirs
         </div>
         <div className="navbutton" onClick={() => navigate("/verify")}>
           Verify
-        </div>
+        </div> */}
       </div>
       <div className="menucontainer">
         <img
@@ -129,6 +132,12 @@ const Navbar = () => {
         </div>
         {user.iswalletAvailable ? (
           user.isConnected ? (
+            // <div >
+            //   <button className="greenbtn">
+            //     {/* <DashboardIcon sx={{ fontSize: 20, marginRight: "5px" }} /> */}
+            //     Connected
+            //   </button>
+            // </div>
             <div className="whitebutton">
               <button onClick={() => navigate("/dashboard")}>
                 <DashboardIcon sx={{ fontSize: 20, marginRight: "5px" }} />
